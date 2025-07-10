@@ -8,14 +8,6 @@ export default function HomePage() {
         Bu kutu görünüyorsa Tailwind kurulumu doğru.
       </div>
 
-      {/* Tailwind config'ten gelen özel renkler */}
-      <div className="bg-primary text-text p-4 rounded mb-4">
-        Bu kutu açık modda açık gri (bg-primary) ve siyah metin (text-text) olmalı.
-      </div>
-
-      <div className="bg-primary-dark text-text-dark p-4 rounded">
-        Bu kutu koyu modda koyu arka plan ve açık metinle görünmeli.
-      </div>
     </main>
   );
 }
