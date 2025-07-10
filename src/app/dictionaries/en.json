@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Your Digital Partner",
+    "subtitle": "for Software Solutions",
+    "description": "Scale your business with Antalya-based software solutions. Shape the future with web, mobile, and AI technologies.",
+    "cta": "Start Your Project",
+    "secondary_cta": "Explore Services"
+  },
+  "services": {
+    "title": "Our Services",
+    "description": "Scale your business with modern technologies",
+    "web_development": {
+      "title": "Web Development",
+      "description": "High-performance web applications with React, Next.js and modern technologies"
+    },
+    "mobile_development": {
+      "title": "Mobile Development",
+      "description": "Native and cross-platform applications for iOS and Android platforms"
+    },
+    "ai_solutions": {
+      "title": "AI Solutions",
+      "description": "Intelligent systems with AI and machine learning technologies"
+    },
+    "consulting": {
+      "title": "Consulting",
+      "description": "Expert consulting services for your digital transformation journey"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "description": "As Baksoft Arge, we provide Antalya-based software solutions.",
+    "mission": "Our Mission",
+    "vision": "Our Vision",
+    "values": "Our Values"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Get in touch with us for your projects",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send"
+    }
+  },
+  "footer": {
+    "description": "Antalya-based software solutions",
+    "rights": "All rights reserved."
+  },
+  "meta": {
+    "home": {
+      "title": "Baksoft Arge | Antalya Software Solutions",
+      "description": "Baksoft Arge provides Antalya-based software solutions. Scale your business with web, mobile and AI technologies."
+    },
+    "about": {
+      "title": "About Us | Baksoft Arge",
+      "description": "Learn about Baksoft Arge. Our Antalya-based software solutions team and values."
+    },
+    "services": {
+      "title": "Our Services | Baksoft Arge",
+      "description": "Web development, mobile applications, AI solutions and consulting services."
+    },
+    "projects": {
+      "title": "Our Projects | Baksoft Arge",
+      "description": "Explore our successful software projects."
+    },
+    "contact": {
+      "title": "Contact | Baksoft Arge",
+      "description": "Get in touch with us for Antalya-based software solutions."
+    }
+  }
+}

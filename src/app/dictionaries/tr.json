@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımızda",
+    "services": "Hizmetler",
+    "projects": "Projeler",
+    "contact": "İletişim"
+  },
+  "hero": {
+    "title": "Yazılım Çözümlerinizin",
+    "subtitle": "Dijital Partneri",
+    "description": "Antalya merkezli yazılım çözümleri ile işinizi büyütün. Web, mobil ve yapay zeka teknolojileriyle geleceği şekillendirin.",
+    "cta": "Projeni Başlat",
+    "secondary_cta": "Hizmetleri Keşfet"
+  },
+  "services": {
+    "title": "Hizmetlerimiz",
+    "description": "Modern teknolojilerle işinizi büyütün",
+    "web_development": {
+      "title": "Web Geliştirme",
+      "description": "React, Next.js ve modern teknolojilerle performanslı web uygulamaları"
+    },
+    "mobile_development": {
+      "title": "Mobil Geliştirme",
+      "description": "iOS ve Android platformlarında native ve cross-platform uygulamalar"
+    },
+    "ai_solutions": {
+      "title": "Yapay Zeka Çözümleri",
+      "description": "AI ve makine öğrenmesi teknolojileriyle akıllı sistemler"
+    },
+    "consulting": {
+      "title": "Danışmanlık",
+      "description": "Dijital dönüşüm sürecinizde uzman danışmanlık hizmeti"
+    }
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "description": "Baksoft Arge olarak, Antalya merkezli yazılım çözümleri sunuyoruz.",
+    "mission": "Misyonumuz",
+    "vision": "Vizyonumuz",
+    "values": "Değerlerimiz"
+  },
+  "contact": {
+    "title": "İletişim",
+    "description": "Projeleriniz için bizimle iletişime geçin",
+    "address": "Adres",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "form": {
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "subject": "Konu",
+      "message": "Mesaj",
+      "send": "Gönder"
+    }
+  },
+  "footer": {
+    "description": "Antalya merkezli yazılım çözümleri",
+    "rights": "Tüm hakları saklıdır."
+  },
+  "meta": {
+    "home": {
+      "title": "Baksoft Arge | Antalya Yazılım Çözümleri",
+      "description": "Baksoft Arge, Antalya merkezli yazılım çözümleri sunar. Web, mobil ve yapay zeka tabanlı teknolojilerle işinizi büyütün."
+    },
+    "about": {
+      "title": "Hakkımızda | Baksoft Arge",
+      "description": "Baksoft Arge hakkında bilgi edinin. Antalya merkezli yazılım çözümleri ekibimiz ve değerlerimiz."
+    },
+    "services": {
+      "title": "Hizmetlerimiz | Baksoft Arge",
+      "description": "Web geliştirme, mobil uygulama, yapay zeka çözümleri ve danışmanlık hizmetlerimiz."
+    },
+    "projects": {
+      "title": "Projelerimiz | Baksoft Arge",
+      "description": "Gerçekleştirdiğimiz başarılı yazılım projelerine göz atın."
+    },
+    "contact": {
+      "title": "İletişim | Baksoft Arge",
+      "description": "Antalya merkezli yazılım çözümleri için bizimle iletişime geçin."
+    }
+  }
+}
