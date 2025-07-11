@@ -16,16 +16,15 @@ export async function generateMetadata({ params: { locale } }: HomePageProps) {
 }
 
 export default async function HomePage({ params: { locale } }: HomePageProps) {
-  //const dict = await getDictionary(locale);
+  const dict = await getDictionary(locale);
 
   return (
-    <></>
-    // <>
-    //   <Hero dict={dict} locale={locale} />
-    //   <Services dict={dict} locale={locale} />
-    //   <About dict={dict} locale={locale} />
-    //   <Projects dict={dict} locale={locale} />
-    //   <Contact dict={dict} locale={locale} />
-    // </>
+    <>
+      <Hero dict={dict} locale={locale} />
+      <Services dict={dict} locale={locale} />
+      <About dict={dict} locale={locale} />
+      <Projects dict={dict} locale={locale} />
+      <Contact /> *
+    </>
   );
 }

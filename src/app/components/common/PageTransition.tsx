@@ -42,7 +42,7 @@ export function PageTransition({ children }: PageTransitionProps) {
         animate="in"
         exit="out"
         variants={pageVariants}
-        transition={pageTransition}
+        // transition={pageTransition}
         className="w-full"
       >
         {children}
