@@ -6,7 +6,7 @@ export function GET() {
   return new Response(
     `User-agent: *
 Allow: /
-Sitemap: https://www.baksoft.com/sitemap.xml
+Sitemap: https://www.baksoftarge.com/sitemap.xml
   `,
     {
       headers: {
