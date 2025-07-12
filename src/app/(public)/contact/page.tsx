@@ -20,11 +20,11 @@ export const metadata = {
     title: "İletişim | Baksoft Antalya Yazılım Şirketi",
     description:
       "Web, mobil ve yapay zeka projeleriniz için bizimle hemen iletişime geçin. Antalya Teknokent'teyiz.",
-    url: "https://www.baksoft.com.tr/contact",
+    url: "https://www.baksoft.com/contact",
     siteName: "Baksoft",
     images: [
       {
-        url: "https://www.baksoft.com.tr/og-image.jpg",
+        url: "https://www.baksoft.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Baksoft İletişim Görseli",
@@ -38,9 +38,9 @@ export const metadata = {
     title: "İletişim | Baksoft Antalya Yazılım Şirketi",
     description:
       "Baksoft ile iletişime geçerek dijital çözümler için ilk adımı atın.",
-    images: ["https://www.baksoft.com.tr/og-image.jpg"],
+    images: ["https://www.baksoft.com/og-image.jpg"],
   },
-  metadataBase: new URL("https://www.baksoft.com.tr"),
+  metadataBase: new URL("https://www.baksoft.com"),
   alternates: {
     canonical: "/contact",
   },

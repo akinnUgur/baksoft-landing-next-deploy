@@ -11,8 +11,8 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Baksoft",
-  url: "https://www.baksoft.com.tr",
-  logo: "https://www.baksoft.com.tr/logo.png",
+  url: "https://www.baksoft.com",
+  logo: "https://www.baksoft.com/logo.png",
   sameAs: [
     "https://www.linkedin.com/company/baksoft",
     "https://www.instagram.com/baksoft",
@@ -23,10 +23,10 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Baksoft",
-  url: "https://www.baksoft.com.tr",
+  url: "https://www.baksoft.com",
   potentialAction: {
     "@type": "SearchAction",
-    target: "https://www.baksoft.com.tr/search?q={search_term_string}",
+    target: "https://www.baksoft.com/search?q={search_term_string}",
     "query-input": "required name=search_term_string",
   },
 };

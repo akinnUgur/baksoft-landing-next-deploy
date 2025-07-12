@@ -24,11 +24,11 @@ export const metadata = {
     title: "Hizmetler | Antalya Web Yazılım, Mobil Uygulama ve AI Geliştirme",
     description:
       "Antalya merkezli yazılım şirketi Baksoft'un sunduğu web, mobil, özel yazılım ve yapay zeka çözümleri.",
-    url: "https://www.baksoft.com.tr/services",
+    url: "https://www.baksoft.com/services",
     siteName: "Baksoft",
     images: [
       {
-        url: "https://www.baksoft.com.tr/og-image.jpg",
+        url: "https://www.baksoft.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Baksoft Hizmetler Sayfası",
@@ -42,9 +42,9 @@ export const metadata = {
     title: "Hizmetler | Antalya Web Yazılım ve Yapay Zeka Geliştirme",
     description:
       "Baksoft'un sunduğu kapsamlı yazılım hizmetlerini keşfedin: web, mobil, özel yazılım, AI ve teknik destek.",
-    images: ["https://www.baksoft.com.tr/og-image.jpg"],
+    images: ["https://www.baksoft.com/og-image.jpg"],
   },
-  metadataBase: new URL("https://www.baksoft.com.tr"),
+  metadataBase: new URL("https://www.baksoft.com"),
   alternates: {
     canonical: "/services",
   },

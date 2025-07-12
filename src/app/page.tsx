@@ -30,11 +30,11 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "Baksoft | Antalya Web Yazılım ve Yapay Zeka Çözümleri",
       description:
         "Antalya merkezli yazılım ajansı Baksoft, web ve mobil teknolojilerde modern çözümler sunar.",
-      url: "https://www.baksoft.com.tr/",
+      url: "https://www.baksoft.com/",
       siteName: "Baksoft",
       images: [
         {
-          url: "https://www.baksoft.com.tr/og-image.jpg",
+          url: "https://www.baksoft.com/og-image.jpg",
           width: 1200,
           height: 630,
           alt: "Baksoft Açılış Görseli",
@@ -48,9 +48,9 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "Baksoft | Antalya Web Yazılım ve Yapay Zeka Çözümleri",
       description:
         "Web, mobil ve AI alanında Antalya'nın yükselen yazılım şirketi.",
-      images: ["https://www.baksoft.com.tr/og-image.jpg"],
+      images: ["https://www.baksoft.com/og-image.jpg"],
     },
-    metadataBase: new URL("https://www.baksoft.com.tr"),
+    metadataBase: new URL("https://www.baksoft.com"),
     alternates: {
       canonical: "/",
     },

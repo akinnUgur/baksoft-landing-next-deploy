@@ -1,7 +1,7 @@
 
 
 export async function GET() {
-  const baseUrl = "https://www.baksoft.com.tr";
+  const baseUrl = "https://www.baksoft.com";
 
   const urls = [
     "/",

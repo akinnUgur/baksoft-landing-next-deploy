@@ -23,11 +23,11 @@ export const metadata = {
     title: "Projelerimiz | Baksoft Yazılım Geliştirme Çözümleri",
     description:
       "Yapay zeka destekli müzik analiz platformu Hakoru dahil olmak üzere geliştirdiğimiz projeleri inceleyin.",
-    url: "https://www.baksoft.com.tr/projects",
+    url: "https://www.baksoft.com/projects",
     siteName: "Baksoft",
     images: [
       {
-        url: "https://www.baksoft.com.tr/og-image.jpg",
+        url: "https://www.baksoft.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Baksoft Projeler",
@@ -41,9 +41,9 @@ export const metadata = {
     title: "Projelerimiz | Baksoft Yazılım Geliştirme Çözümleri",
     description:
       "Baksoft’un yapay zeka tabanlı yazılım projelerini keşfedin. Hakoru şu anda canlı!",
-    images: ["https://www.baksoft.com.tr/og-image.jpg"],
+    images: ["https://www.baksoft.com/og-image.jpg"],
   },
-  metadataBase: new URL("https://www.baksoft.com.tr"),
+  metadataBase: new URL("https://www.baksoft.com"),
   alternates: {
     canonical: "/projects",
   },
