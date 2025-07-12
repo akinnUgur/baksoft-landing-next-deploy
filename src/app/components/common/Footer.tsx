@@ -96,7 +96,7 @@ export function Footer() {
               </h3>
               <div className="text-sm text-subtext dark:text-subtext-dark space-y-2">
                 <p className="hover:text-favorite transition-colors duration-300">Antalya, Türkiye</p>
-                <p className="hover:text-favorite transition-colors duration-300">info@baksoft.com.tr</p>
+                <p className="hover:text-favorite transition-colors duration-300">info@baksoftarge.com.tr</p>
                 <p className="hover:text-favorite transition-colors duration-300">+90(536) 910 70 50</p>
               </div>
             </div>
@@ -120,7 +120,7 @@ export function Footer() {
                   <Linkedin className="w-6 h-6" />
                 </Link>
                 <Link
-                  href="mailto:info@baksoft.com.tr"
+                  href="mailto:info@baksoftarge.com.tr"
                   onClick={handleMailClick}
                   aria-label="Baksoft e-posta adresi"
                   className={`text-subtext dark:text-subtext-dark hover:text-accent hover:scale-125 transition-all duration-300 ${mailShake ? "animate-shake" : ""
