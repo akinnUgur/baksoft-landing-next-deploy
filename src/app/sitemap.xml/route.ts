@@ -5,10 +5,10 @@ export async function GET() {
 
   const urls = [
     "/",
-    "/hakkimizda",
-    "/hizmetler",
-    "/projeler",
-    "/iletisim",
+    
+    "/services",
+    "/projects",
+    "/contact",
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
