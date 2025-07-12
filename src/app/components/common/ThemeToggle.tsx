@@ -28,6 +28,7 @@ export function ThemeToggle() {
       className="relative w-10 h-10 rounded-full bg-secondary dark:bg-secondary-dark border border-third dark:border-third-dark flex items-center justify-center overflow-hidden"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
+      aria-label="Tema değiştir"
     >
       <motion.div
         className="absolute inset-0"

@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // ✅ Production build'te source map üret
+  productionBrowserSourceMaps: true,
 };
 
 export default nextConfig;

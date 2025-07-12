@@ -4,69 +4,43 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Dictionary, Locale } from "../../lib/i18n";
-import { LanguageToggle } from "../../components/common/LanguageToggle";
 import { ThemeToggle } from "./ThemeToggle";
 
-interface NavbarProps {
-  dict: Dictionary;
-  locale: Locale;
-}
+ const navigation = [
+    { name: "Anasayfa", href: "/" },
+    // { name: "Hakkımızda", href: "/about" },
+    { name: "Hizmetler", href: "/services" },
+    { name: "Projeler", href: "/projects" },
+    { name: "İletişim", href: "/contact" },
+  ];
 
-export function Navbar({ dict, locale }: NavbarProps) {
+export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  const navigation = [
-    { name: dict.nav.home, href: locale === "tr" ? "/" : `/${locale}` },
-    {
-      name: dict.nav.about,
-      href: locale === "tr" ? "/hakkimizda" : `/${locale}/about`,
-    },
-    {
-      name: dict.nav.services,
-      href: locale === "tr" ? "/hizmetler" : `/${locale}/services`,
-    },
-    {
-      name: dict.nav.projects,
-      href: locale === "tr" ? "/projeler" : `/${locale}/projects`,
-    },
-    {
-      name: dict.nav.contact,
-      href: locale === "tr" ? "/iletisim" : `/${locale}/contact`,
-    },
-  ];
-
-  const isActive = (href: string) => {
-    if (href === "/" || href === `/${locale}`) {
-      return pathname === `/${locale}` || pathname === "/";
-    }
-    return pathname.includes(href);
-  };
+  const isActive = (href: string) => pathname === href;
 
   return (
     <nav className="sticky top-0 z-50 bg-primary/80 dark:bg-primary-dark/80 backdrop-blur-md border-b border-secondary dark:border-secondary-dark">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link
-            href={locale === "tr" ? "/" : `/${locale}`}
-            className="flex items-center space-x-2"
-          >
+          <Link href="/" className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-gradient-to-br from-favorite to-accent rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">B</span>
             </div>
-            <div className="hidden sm:block">
-              <div className="text-lg font-bold text-text dark:text-text-dark">
-                Baksoft
-              </div>
-              <div className="text-xs text-subtext dark:text-subtext-dark -mt-1">
-                ARGE
-              </div>
-            </div>
+            <div className="block">
+  <div className="text-lg font-bold text-text dark:text-text-dark leading-none">
+    Baksoft
+  </div>
+  <div className="text-xs text-subtext dark:text-subtext-dark -mt-0.5">
+    ARGE
+  </div>
+</div>
+
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
               <Link
@@ -92,15 +66,13 @@ export function Navbar({ dict, locale }: NavbarProps) {
             ))}
           </div>
 
-          {/* Theme & Language Toggle */}
+          {/* Sağ ikonlar */}
           <div className="flex items-center space-x-4">
             <ThemeToggle />
-            <LanguageToggle currentLocale={locale} />
-
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden relative w-6 h-6 focus:outline-none"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label="Mobil Menü"
             >
               <motion.span
                 className="absolute block w-full h-0.5 bg-text dark:bg-text-dark transform transition-transform"
@@ -119,34 +91,36 @@ export function Navbar({ dict, locale }: NavbarProps) {
         </div>
 
         {/* Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="px-2 pt-2 pb-3 space-y-1 bg-secondary dark:bg-secondary-dark rounded-lg my-4">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`block px-3 py-2 text-base font-medium rounded-md transition-colors ${
-                      isActive(item.href)
-                        ? "text-favorite bg-third dark:bg-third-dark"
-                        : "text-text dark:text-text-dark hover:text-favorite hover:bg-third dark:hover:bg-third-dark"
-                    }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Mobile Dropdown Menu – ekranı kaydırmadan açılır */}
+<AnimatePresence>
+  {isOpen && (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.2 }}
+      className="md:hidden absolute right-4 top-16 z-40 w-48 bg-secondary dark:bg-secondary-dark shadow-lg rounded-xl overflow-hidden"
+    >
+      <div className="py-2">
+        {navigation.map((item) => (
+          <Link
+            key={item.name}
+            href={item.href}
+            className={`block px-4 py-2 text-sm font-medium transition-colors ${
+              isActive(item.href)
+                ? "text-favorite bg-third dark:bg-third-dark"
+                : "text-text dark:text-text-dark hover:text-favorite hover:bg-third dark:hover:bg-third-dark"
+            }`}
+            onClick={() => setIsOpen(false)}
+          >
+            {item.name}
+          </Link>
+        ))}
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
       </div>
     </nav>
   );

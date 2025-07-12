@@ -25,11 +25,11 @@ const pageVariants = {
   },
 };
 
-const pageTransition = {
-  type: "tween",
-  ease: "anticipate",
-  duration: 0.4,
-};
+// const pageTransition = {
+//   type: "tween",
+//   ease: "anticipate",
+//   duration: 0.4,
+// };
 
 export function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
@@ -42,7 +42,7 @@ export function PageTransition({ children }: PageTransitionProps) {
         animate="in"
         exit="out"
         variants={pageVariants}
-        // transition={pageTransition}
+         
         className="w-full"
       >
         {children}

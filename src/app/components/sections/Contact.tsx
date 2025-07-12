@@ -12,20 +12,43 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<null | "success">(null);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
+    setFormError(null); // önceki hatayı temizle
 
-    // Simulate form submission
-    setTimeout(() => {
+    // frontend taraflı validation
+    if (!formData.name || !formData.email || !formData.message) {
+      setFormError("Lütfen ad, e-posta ve mesaj alanlarını doldurun.");
       setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        setFormError(data.error || "Gönderim sırasında bir hata oluştu.");
+        return;
+      }
+
       setSubmitStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
-
-      // Reset status after 3 seconds
       setTimeout(() => setSubmitStatus(null), 3000);
-    }, 2000);
+    } catch  {
+      setFormError("Sunucuya ulaşılamadı.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+
 
   const contactInfo = [
     {
@@ -90,9 +113,9 @@ const Contact = () => {
           />
         </svg>
       ),
-      title: "Web Sitesi",
-      info: "hakoru.com",
-      link: "https://hakoru.com",
+      title: "İletişim Numarası",
+      info: "+90(536) 910 70 50",
+      // link: "https://hakoru.com",
     },
   ];
 
@@ -209,40 +232,59 @@ const Contact = () => {
               <div className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <div className="block text-sm font-medium text-text dark:text-text-dark mb-2">
+                    <label className="block text-sm font-medium text-text dark:text-text-dark mb-2">
                       Ad Soyad
-                    </div>
-                    <div className="w-full px-4 py-3 bg-primary dark:bg-primary-dark border border-third dark:border-third-dark rounded-lg focus:ring-2 focus:ring-favorite focus:border-favorite transition-colors text-text dark:text-text-dark placeholder-subtext dark:placeholder-subtext-dark">
-                      {formData.name || "Adınızı ve soyadınızı girin"}
-                    </div>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Adınızı ve soyadınızı girin"
+                      className="w-full px-4 py-3 bg-primary dark:bg-primary-dark border border-third dark:border-third-dark rounded-lg text-text dark:text-text-dark placeholder-subtext dark:placeholder-subtext-dark"
+                    />
                   </div>
                   <div>
-                    <div className="block text-sm font-medium text-text dark:text-text-dark mb-2">
+                    <label className="block text-sm font-medium text-text dark:text-text-dark mb-2">
                       E-posta
-                    </div>
-                    <div className="w-full px-4 py-3 bg-primary dark:bg-primary-dark border border-third dark:border-third-dark rounded-lg focus:ring-2 focus:ring-favorite focus:border-favorite transition-colors text-text dark:text-text-dark placeholder-subtext dark:placeholder-subtext-dark">
-                      {formData.email || "E-posta adresinizi girin"}
-                    </div>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="E-posta adresinizi girin"
+                      className="w-full px-4 py-3 bg-primary dark:bg-primary-dark border border-third dark:border-third-dark rounded-lg text-text dark:text-text-dark placeholder-subtext dark:placeholder-subtext-dark"
+                    />
                   </div>
                 </div>
 
                 <div>
-                  <div className="block text-sm font-medium text-text dark:text-text-dark mb-2">
+                  <label className="block text-sm font-medium text-text dark:text-text-dark mb-2">
                     Konu
-                  </div>
-                  <div className="w-full px-4 py-3 bg-primary dark:bg-primary-dark border border-third dark:border-third-dark rounded-lg focus:ring-2 focus:ring-favorite focus:border-favorite transition-colors text-text dark:text-text-dark">
-                    {formData.subject || "Konu seçiniz"}
-                  </div>
+                  </label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    placeholder="Konu girin"
+                    className="w-full px-4 py-3 bg-primary dark:bg-primary-dark border border-third dark:border-third-dark rounded-lg text-text dark:text-text-dark placeholder-subtext dark:placeholder-subtext-dark"
+                  />
                 </div>
 
                 <div>
-                  <div className="block text-sm font-medium text-text dark:text-text-dark mb-2">
+                  <label className="block text-sm font-medium text-text dark:text-text-dark mb-2">
                     Mesajınız
-                  </div>
-                  <div className="w-full px-4 py-3 bg-primary dark:bg-primary-dark border border-third dark:border-third-dark rounded-lg focus:ring-2 focus:ring-favorite focus:border-favorite transition-colors text-text dark:text-text-dark placeholder-subtext dark:placeholder-subtext-dark min-h-[150px]">
-                    {formData.message ||
-                      "Projeniz hakkında detaylı bilgi verin..."}
-                  </div>
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={6}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    placeholder="Projeniz hakkında detaylı bilgi verin..."
+                    className="w-full px-4 py-3 bg-primary dark:bg-primary-dark border border-third dark:border-third-dark rounded-lg text-text dark:text-text-dark placeholder-subtext dark:placeholder-subtext-dark"
+                  />
                 </div>
 
                 <motion.button
@@ -283,12 +325,22 @@ const Contact = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="bg-success/10 border border-success/30 text-success px-4 py-3 rounded-lg text-center"
                   >
-                    ✓ Mesajınız başarıyla gönderildi! En kısa sürede sizinle
-                    iletişime geçeceğiz.
+                    ✓ Mesajınız başarıyla gönderildi! En kısa sürede sizinle iletişime geçeceğiz.
                   </motion.div>
                 )}
+                {formError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg text-center"
+                  >
+                    {formError}
+                  </motion.div>
+                )}
+
               </div>
             </motion.div>
+
           </div>
 
           {/* Bottom CTA */}
@@ -309,6 +361,12 @@ const Contact = () => {
               <div className="flex flex-wrap gap-4 justify-center">
                 <span className="bg-white/20 px-4 py-2 rounded-full text-sm">
                   Web Development
+                </span>
+                <span className="bg-white/20 px-4 py-2 rounded-full text-sm">
+                  Custom Software
+                </span>
+                <span className="bg-white/20 px-4 py-2 rounded-full text-sm">
+                  Consulting
                 </span>
                 <span className="bg-white/20 px-4 py-2 rounded-full text-sm">
                   Mobile Apps
