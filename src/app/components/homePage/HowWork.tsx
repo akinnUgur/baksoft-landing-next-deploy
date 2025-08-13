@@ -33,10 +33,10 @@ export default function HowWeWork() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="relative py-32 px-6 bg-gradient-to-b from-primary via-secondary/40 to-primary dark:from-primary-dark dark:via-secondary-dark/40 dark:to-primary-dark">
-      <div className="absolute top-10 left-10 w-96 h-96 rounded-full bg-accent/10 blur-3xl z-0" />
-      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full bg-favorite/10 blur-3xl z-0" />
-
+    <section
+      ref={ref}
+      className="relative py-32 px-6" // ❌ tüm bg- gradient'ler kaldırıldı
+    >
       <div className="container mx-auto px-4 relative z-10">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-text dark:text-text-dark mb-4">
           Nasıl Çalışırız?
@@ -69,7 +69,7 @@ export default function HowWeWork() {
             ))}
           </div>
 
-          {/* Sağda sevimli göz animasyonu */}
+          {/* Sağ görsel/animasyon */}
           <div className="hidden md:flex md:w-1/3 items-center justify-center">
             <EyeTracker />
           </div>

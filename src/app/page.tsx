@@ -1,8 +1,6 @@
-import { PageTransition } from "@/app/components/common/PageTransition";
-import Hero from "./components/sections/Hero";
-import WhyBaksoft from "./components/homePage/WhyUs";
-import HowWeWork from "./components/homePage/HowWork";
 import type { Metadata } from "next";
+import HomePageClient from "./components/HomePageClient";
+import { CAROUSEL_ITEMS } from "./lib/data";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -33,12 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: "https://www.baksoftarge.com/",
       siteName: "Baksoft",
       images: [
-        {
-          url: "https://www.baksoftarge.com/og-image.jpg",
-          width: 1200,
-          height: 630,
-          alt: "Baksoft Açılış Görseli",
-        },
+        { url: "https://www.baksoftarge.com/og-image.jpg", width: 1200, height: 630, alt: "Baksoft Açılış Görseli" },
       ],
       locale: "tr_TR",
       type: "website",
@@ -46,27 +39,15 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: "Baksoft | Antalya Web Yazılım ve Yapay Zeka Çözümleri",
-      description:
-        "Web, mobil ve AI alanında Antalya'nın yükselen yazılım şirketi.",
+      description: "Web, mobil ve AI alanında Antalya'nın yükselen yazılım şirketi.",
       images: ["https://www.baksoftarge.com/og-image.jpg"],
     },
     metadataBase: new URL("https://www.baksoftarge.com"),
-    alternates: {
-      canonical: "/",
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    alternates: { canonical: "/" },
+    robots: { index: true, follow: true },
   };
 }
 
-export default function HomePage() {
-  return (
-    <PageTransition>
-      <Hero />
-      <WhyBaksoft />
-      <HowWeWork />
-    </PageTransition>
-  );
+export default function Page() {
+  return <HomePageClient items={CAROUSEL_ITEMS} />;
 }

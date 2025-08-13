@@ -50,7 +50,7 @@ const itemVariants = {
 
 const Projects = () => {
   return (
-    <section className="py-20 bg-secondary dark:bg-secondary-dark">
+    <section className="py-20 ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"

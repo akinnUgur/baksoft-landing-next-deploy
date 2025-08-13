@@ -1,9 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import { Navbar } from "./components/common/Navbar";
-import { PageTransition } from "./components/common/PageTransition";
-import { Footer } from "./components/common/Footer";
+import ClientShell from "./ClientShell";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -37,29 +35,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-
-       
-
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="min-h-screen flex flex-col bg-primary text-text dark:bg-primary-dark dark:text-text-dark transition-colors duration-300">
-            <Navbar />
-            <main className="flex-1">
-              <PageTransition>{children}</PageTransition>
-            </main>
-            <Footer />
-          </div>
+          {/* Navbar/Footer göster/gizle mantığı ClientShell içinde */}
+          <ClientShell>{children}</ClientShell>
         </ThemeProvider>
       </body>
     </html>
