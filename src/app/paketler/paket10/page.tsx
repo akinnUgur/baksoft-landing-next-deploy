@@ -272,33 +272,46 @@ export default function Paket15Clinic() {
       {/* Top strip */}
       <div className="bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500 text-white text-sm">
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
-          <span className="font-semibold">İlk muayene ücretsiz · Dijital gülüş tasarımı</span>
+          <span className="font-semibold">Baksoft · Özelleştirilebilir Tasarım No:10</span>
           <a href="#booking" className="underline underline-offset-4">Randevu Al</a>
         </div>
       </div>
 
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-slate-200/60 bg-white/80 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-teal-400 to-cyan-400 shadow-[0_0_40px_-12px_rgba(20,184,166,0.6)]" />
-            <div className="font-semibold tracking-wide">Baksoft · Nova Klinik</div>
-          </div>
-          <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-600">
-            <a href="#booking" className="hover:text-slate-900">Randevu</a>
-            <a href="#services" className="hover:text-slate-900">Hizmetler</a>
-            <a href="#doctors" className="hover:text-slate-900">Doktorlar</a>
-            <a href="#gallery" className="hover:text-slate-900">Önce/Sonra</a>
-            <a href="#faq" className="hover:text-slate-900">SSS</a>
-          </nav>
-          <a
-            href="#booking"
-            className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-teal-500 text-white font-semibold hover:bg-teal-400 transition"
-          >
-            Randevu Al
-          </a>
-        </div>
-      </header>
+  <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
+    {/* Logo + Marka */}
+    <a
+      href="/paketler"
+      className="flex items-center gap-2"
+    >
+      <img
+        src="/baksoftLogo.png"
+        alt="Baksoft Logo"
+        className="h-8 w-8 object-contain"
+      />
+      <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
+    </a>
+
+    {/* Menü */}
+    <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-600">
+      <a href="#booking" className="hover:text-slate-900">Randevu</a>
+      <a href="#services" className="hover:text-slate-900">Hizmetler</a>
+      <a href="#doctors" className="hover:text-slate-900">Doktorlar</a>
+      <a href="#gallery" className="hover:text-slate-900">Önce/Sonra</a>
+      <a href="#faq" className="hover:text-slate-900">SSS</a>
+    </nav>
+
+    {/* Sağ buton */}
+    <a
+      href="#booking"
+      className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-teal-500 text-white font-semibold hover:bg-teal-400 transition"
+    >
+      Randevu Al
+    </a>
+  </div>
+</header>
+
 
       {/* Hero */}
       <section className="relative overflow-hidden">

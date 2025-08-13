@@ -359,38 +359,53 @@ export default function Paket14RentACar() {
       {/* Top promo */}
       <div className="bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-900 text-sm">
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
-          <span className="font-semibold">Yaz Kampanyası · %15’e varan indirim · Ücretsiz iptal</span>
+          <span className="font-semibold">Baksoft · Özelleştirilebilir Tasarım No:7</span>
           <a href="#search" className="underline underline-offset-4">Şimdi Ara</a>
         </div>
       </div>
 
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/75 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
-          <div className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 shadow-[0_0_40px_-12px_rgba(245,158,11,0.6)]" />
-            <div className="font-semibold tracking-wide">Baksoft · Aurex Rent</div>
-          </div>
-          <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
-            <a href="#search" className="hover:text-white">Rezervasyon</a>
-            <a href="#cars" className="hover:text-white">Araçlar</a>
-            <a href="#extras" className="hover:text-white">Ekstralar</a>
-            <a href="#faq" className="hover:text-white">SSS</a>
-          </nav>
-          <button
-            onClick={() => setCompareOpen(true)}
-            className="ml-auto rounded-xl px-3 h-10 grid place-items-center border border-white/15 text-sm hover:bg-white/5"
-          >
-            Karşılaştır ({compare.length})
-          </button>
-          <a
-            href="#search"
-            className="ml-2 rounded-xl px-4 h-10 grid place-items-center bg-amber-400 text-slate-900 font-semibold hover:bg-amber-300 transition"
-          >
-            Fiyatları Gör
-          </a>
-        </div>
-      </header>
+  <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
+    {/* Logo + Marka */}
+    <a
+      href="/paketler"
+      className="flex items-center gap-3"
+    >
+      <img
+        src="/baksoftLogo.png"
+        alt="Baksoft Logo"
+        className="h-8 w-8 object-contain"
+      />
+      <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
+    </a>
+
+    {/* Menü */}
+    <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
+      <a href="#search" className="hover:text-white">Rezervasyon</a>
+      <a href="#cars" className="hover:text-white">Araçlar</a>
+      <a href="#extras" className="hover:text-white">Ekstralar</a>
+      <a href="#faq" className="hover:text-white">SSS</a>
+    </nav>
+
+    {/* Karşılaştır butonu */}
+    <button
+      onClick={() => setCompareOpen(true)}
+      className="ml-auto rounded-xl px-3 h-10 grid place-items-center border border-white/15 text-sm hover:bg-white/5"
+    >
+      Karşılaştır ({compare.length})
+    </button>
+
+    {/* Sağ buton */}
+    <a
+      href="#search"
+      className="ml-2 rounded-xl px-4 h-10 grid place-items-center bg-amber-400 text-slate-900 font-semibold hover:bg-amber-300 transition"
+    >
+      Fiyatları Gör
+    </a>
+  </div>
+</header>
+
 
       {/* Hero + Search */}
       <section className="relative overflow-hidden">

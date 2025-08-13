@@ -157,29 +157,47 @@ export default function Paket18CozyCafe() {
         </div>
         <div className="w-[2px] h-16 bg-red-700/70 rounded-full shadow-[0_0_20px_rgba(185,28,28,0.6)]" />
       </aside>
-
+{/* Top strip */}
+      <div style={{ background: 'var(--accent)', color: 'var(--bg)' }} className="text-xs">
+        <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
+          <span className="tracking-wide opacity-90">Baksoft · Özelleştirilebilir Tasarım No:3 </span>
+          <span className="opacity-80">Edition • <b>Concept</b></span>
+        </div>
+      </div>
       {/* HEADER */}
       <header className="lg:ml-24 sticky top-0 z-40 border-b border-amber-900/40 bg-[#15110f]/70 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-5 h-16 flex items-center gap-4">
-          <div className="font-semibold tracking-wide">
-            <span className="text-amber-400">Cozy</span>
-            <span className="text-red-500">Central</span>{' '}
-            <span className="text-green-500">Cafe</span>
-          </div>
-          <nav className="hidden md:flex ml-6 gap-6 text-sm text-amber-200/80">
-            <a href="#menu" className="hover:text-amber-100">Menü</a>
-            <a href="#special" className="hover:text-amber-100">Bugünün Kahvesi</a>
-            <a href="#reviews" className="hover:text-amber-100">Yorumlar</a>
-            <a href="#reserve" className="hover:text-amber-100">Rezervasyon</a>
-          </nav>
-          <a
-            href="#reserve"
-            className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-red-600 text-amber-50 font-medium hover:bg-red-500"
-          >
-            Masa Ayırt
-          </a>
-        </div>
-      </header>
+  <div className="mx-auto max-w-7xl px-5 h-16 flex items-center gap-4">
+    {/* Logo + Marka */}
+    <a
+      href="/paketler"
+      className="font-semibold tracking-wide flex items-center gap-2"
+    >
+      <img
+        src="/baksoftLogo.png"
+        alt="Baksoft Logo"
+        className="h-8 w-8 object-contain"
+      />
+      <span className="text-amber-400">Baksoft Tasarım</span>
+    </a>
+
+    {/* Menü */}
+    <nav className="hidden md:flex ml-6 gap-6 text-sm text-amber-200/80">
+      <a href="#menu" className="hover:text-amber-100">Menü</a>
+      <a href="#special" className="hover:text-amber-100">Bugünün Kahvesi</a>
+      <a href="#reviews" className="hover:text-amber-100">Yorumlar</a>
+      <a href="#reserve" className="hover:text-amber-100">Rezervasyon</a>
+    </nav>
+
+    {/* Sağ buton */}
+    <a
+      href="#reserve"
+      className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-red-600 text-amber-50 font-medium hover:bg-red-500"
+    >
+      Masa Ayırt
+    </a>
+  </div>
+</header>
+
 
       {/* HERO — loş kafe + string lights + Xmas vibe */}
       <section className="lg:ml-24 relative">

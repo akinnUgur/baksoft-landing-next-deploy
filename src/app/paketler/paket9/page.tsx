@@ -388,33 +388,45 @@ export default function Paket13Gym() {
       {/* TOP PROMO */}
       <div className="bg-gradient-to-r from-lime-500 to-cyan-500 text-slate-900 text-sm">
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
-          <span className="font-semibold">Yeni Sezon · 3 Ay Al 1 Ay Bizden</span>
+          <span className="font-semibold">Baksoft · Özelleştirilebilir Tasarım No:9</span>
           <a href="#plans" className="underline underline-offset-4">Planları Gör</a>
         </div>
       </div>
 
       {/* HEADER */}
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/75 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-lime-400 to-cyan-400 shadow-[0_0_40px_-12px_rgba(34,197,94,0.7)]" />
-            <div className="font-semibold tracking-wide">Baksoft · TitanFit</div>
-          </div>
-          <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
-            <a href="#plans" className="hover:text-white">Üyelik</a>
-            <a href="#builder" className="hover:text-white">Program Oluştur</a>
-            <a href="#schedule" className="hover:text-white">Ders Takvimi</a>
-            <a href="#coaches" className="hover:text-white">Antrenörler</a>
-            <a href="#contact" className="hover:text-white">İletişim</a>
-          </nav>
-          <a
-            href="#plans"
-            className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-lime-500 text-slate-900 font-semibold hover:bg-lime-400 transition"
-          >
-            Üye Ol
-          </a>
-        </div>
-      </header>
+     <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/75 backdrop-blur">
+  <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
+    {/* Logo + Marka */}
+    <a
+      href="/paketler"
+      className="flex items-center gap-2"
+    >
+      <img
+        src="/baksoftLogo.png"
+        alt="Baksoft Logo"
+        className="h-8 w-8 object-contain"
+      />
+      <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
+    </a>
+
+    {/* Menü */}
+    <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
+      <a href="#plans" className="hover:text-white">Üyelik</a>
+      <a href="#builder" className="hover:text-white">Program Oluştur</a>
+      <a href="#schedule" className="hover:text-white">Ders Takvimi</a>
+      <a href="#coaches" className="hover:text-white">Antrenörler</a>
+      <a href="#contact" className="hover:text-white">İletişim</a>
+    </nav>
+
+    {/* Sağ buton */}
+    <a
+      href="#plans"
+      className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-lime-500 text-slate-900 font-semibold hover:bg-lime-400 transition"
+    >
+      Üye Ol
+    </a>
+  </div>
+</header>
 
       {/* HERO */}
       <section className="relative overflow-hidden">

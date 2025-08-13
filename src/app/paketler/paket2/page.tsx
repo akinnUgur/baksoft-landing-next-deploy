@@ -127,26 +127,47 @@ export default function Paket17Bistro() {
         <div className="-rotate-90 tracking-[0.3em] text-xs text-stone-600">BISTRO · ANTALYA</div>
         <div className="w-[2px] h-16 bg-amber-300/60 rounded-full" />
       </aside>
-
+{/* Top strip */}
+      <div style={{ background: 'var(--accent)', color: 'var(--bg)' }} className="text-xs">
+        <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
+          <span className="tracking-wide opacity-90">Baksoft · Özelleştirilebilir Tasarım No:2 </span>
+          <span className="opacity-80">Edition • <b>Concept</b></span>
+        </div>
+      </div>
       {/* HEADER */}
       <header className="lg:ml-20 sticky top-0 z-40 border-b border-amber-200/60 bg-[#fbf7f2]/80 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-5 h-16 flex items-center gap-4">
-          <div className="font-semibold tracking-wide">
-            <span className="text-amber-700">Terra</span> & <span className="text-rose-700">Sea</span> Bistro
-          </div>
-          <nav className="hidden md:flex ml-6 gap-6 text-sm text-stone-600">
-            <a href="#menu" className="hover:text-stone-900">Menü</a>
-            <a href="#chef" className="hover:text-stone-900">Şefin Önerileri</a>
-            <a href="#reserve" className="hover:text-stone-900">Rezervasyon</a>
-          </nav>
-          <a
-            href="#reserve"
-            className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-stone-900 text-amber-100 font-medium hover:opacity-90"
-          >
-            Masa Ayırt
-          </a>
-        </div>
-      </header>
+  <div className="mx-auto max-w-7xl px-5 h-16 flex items-center gap-4">
+    {/* Logo + Marka */}
+    <a
+      href="/paketler"
+      className="font-semibold tracking-wide flex items-center gap-2"
+    >
+      <img
+        src="/baksoftLogo.png"
+        alt="Baksoft Logo"
+        className="h-8 w-8 object-contain"
+      />
+      <span className="text-amber-700">Baksoft Tasarım</span>
+    </a>
+
+    {/* Menü */}
+    <nav className="hidden md:flex ml-6 gap-6 text-sm text-stone-600">
+      <a href="#menu" className="hover:text-stone-900">Menü</a>
+      <a href="#chef" className="hover:text-stone-900">Şefin Önerileri</a>
+      <a href="#reserve" className="hover:text-stone-900">Rezervasyon</a>
+    </nav>
+
+    {/* Sağ buton */}
+    <a
+      href="#reserve"
+      className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-stone-900 text-amber-100 font-medium hover:opacity-90"
+    >
+      Masa Ayırt
+    </a>
+  </div>
+</header>
+
+
 
       {/* HERO – Asimetrik, açık tema + organik dalga */}
       <section className="lg:ml-20 relative">

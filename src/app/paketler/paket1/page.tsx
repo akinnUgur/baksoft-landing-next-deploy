@@ -226,67 +226,77 @@ export default function Paket16Interior() {
       {/* Top strip */}
       <div style={{ background: 'var(--accent)', color: 'var(--bg)' }} className="text-xs">
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
-          <span className="tracking-wide opacity-90">Baksoft · Atelier — İç Mimarlık & Mekân Tasarımı</span>
+          <span className="tracking-wide opacity-90">Baksoft · Özelleştirilebilir Tasarım No:1 </span>
           <span className="opacity-80">Edition • <b>Concept</b></span>
         </div>
       </div>
 
       {/* Header */}
-      <header
-        className="sticky top-0 z-30 border-b backdrop-blur"
+<header
+  className="sticky top-0 z-30 border-b backdrop-blur"
+  style={{
+    background: 'color-mix(in oklab, var(--bg) 92%, transparent)',
+    borderColor: 'rgb(0 0 0 / 0.10)',
+  }}
+>
+  <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
+    {/* Logo + Marka */}
+    <a
+      href="/paketler"
+      className="flex items-center gap-3"
+    >
+      <div
+        className="h-8 w-8 rounded-lg"
         style={{
-          background: 'color-mix(in oklab, var(--bg) 92%, transparent)',
-          borderColor: 'rgb(0 0 0 / 0.10)',
+          background: 'conic-gradient(from 140deg, var(--accent), var(--soft), var(--accent))',
+        }}
+      />
+      <div className="font-serif text-lg font-semibold tracking-tight">
+        Baksoft Tasarım
+      </div>
+    </a>
+
+    {/* Menü */}
+    <nav className="hidden md:flex ml-6 gap-6 text-sm opacity-80">
+      <a href="#mosaic" className="hover:opacity-100">Projeler</a>
+      <a href="#materials" className="hover:opacity-100">Malzemeler</a>
+      <a href="#beforeafter" className="hover:opacity-100">Önce/Sonra</a>
+      <a href="#process" className="hover:opacity-100">Süreç</a>
+      <a href="#budget" className="hover:opacity-100">Budget</a>
+    </nav>
+
+    {/* Style selector */}
+    <div className="ml-auto flex items-center gap-2">
+      <span className="text-xs opacity-70">Stil:</span>
+      <div
+        className="rounded-xl border p-1 flex gap-1"
+        style={{
+          borderColor: 'rgb(0 0 0 / 0.15)',
+          background: 'color-mix(in oklab, var(--soft) 60%, transparent)',
         }}
       >
-        <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
-          <div className="flex items-center gap-3">
-            <div
-              className="h-8 w-8 rounded-lg"
-              style={{ background: 'conic-gradient(from 140deg, var(--accent), var(--soft), var(--accent))' }}
-            />
-            <div className="font-serif text-lg font-semibold tracking-tight">Atelier Aure</div>
-          </div>
+        {PRESETS.map((p) => (
+          <button
+            key={p.key}
+            onClick={() => setStyle(p.key)}
+            className="px-3 h-8 rounded-lg text-sm"
+            style={{
+              color: style === p.key ? 'var(--bg)' : 'rgb(0 0 0 / 0.80)',
+              background: style === p.key ? 'var(--accent)' : 'transparent',
+              border:
+                style === p.key
+                  ? '1px solid rgb(0 0 0 / 0.10)'
+                  : '1px solid transparent',
+            }}
+          >
+            {p.name}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</header>
 
-          <nav className="hidden md:flex ml-6 gap-6 text-sm opacity-80">
-            <a href="#mosaic" className="hover:opacity-100">Projeler</a>
-            <a href="#materials" className="hover:opacity-100">Malzemeler</a>
-            <a href="#beforeafter" className="hover:opacity-100">Önce/Sonra</a>
-            <a href="#process" className="hover:opacity-100">Süreç</a>
-            <a href="#budget" className="hover:opacity-100">Budget</a>
-          </nav>
-
-          {/* Style selector */}
-          <div className="ml-auto flex items-center gap-2">
-            <span className="text-xs opacity-70">Stil:</span>
-            <div
-              className="rounded-xl border p-1 flex gap-1"
-              style={{
-                borderColor: 'rgb(0 0 0 / 0.15)',
-                background: 'color-mix(in oklab, var(--soft) 60%, transparent)',
-              }}
-            >
-              {PRESETS.map((p) => (
-                <button
-                  key={p.key}
-                  onClick={() => setStyle(p.key)}
-                  className="px-3 h-8 rounded-lg text-sm"
-                  style={{
-                    color: style === p.key ? 'var(--bg)' : 'rgb(0 0 0 / 0.80)',
-                    background: style === p.key ? 'var(--accent)' : 'transparent',
-                    border:
-                      style === p.key
-                        ? '1px solid rgb(0 0 0 / 0.10)'
-                        : '1px solid transparent',
-                  }}
-                >
-                  {p.name}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </header>
 
       {/* HERO */}
       <section

@@ -213,32 +213,45 @@ export default function Paket15AntalyaHotel() {
       {/* Top promo */}
       <div className="bg-gradient-to-r from-teal-300 via-cyan-300 to-emerald-300 text-slate-900 text-sm">
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
-          <span className="font-semibold">Erken Rezervasyon · %20’ye varan indirim · Ücretsiz iptal</span>
+          <span className="font-semibold">Baksoft · Özelleştirilebilir Tasarım No:11</span>
           <a href="#search" className="underline underline-offset-4">Tarih Seç</a>
         </div>
       </div>
 
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/75 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
-          <div className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-teal-300 to-cyan-300 shadow-[0_0_42px_-14px_rgba(94,234,212,0.7)]" />
-            <div className="font-semibold tracking-wide">Baksoft · AntalyaStay</div>
-          </div>
-          <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
-            <a href="#search" className="hover:text-white">Arama</a>
-            <a href="#hotels" className="hover:text-white">Oteller</a>
-            <a href="#map" className="hover:text-white">Harita</a>
-            <a href="#faq" className="hover:text-white">SSS</a>
-          </nav>
-          <a
-            href="#search"
-            className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-teal-300 text-slate-900 font-semibold hover:bg-teal-200 transition"
-          >
-            Fiyatları Gör
-          </a>
-        </div>
-      </header>
+  <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
+    {/* Logo + Marka */}
+    <a
+      href="/paketler"
+      className="flex items-center gap-3"
+    >
+      <img
+        src="/baksoftLogo.png"
+        alt="Baksoft Logo"
+        className="h-8 w-8 object-contain"
+      />
+      <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
+    </a>
+
+    {/* Menü */}
+    <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
+      <a href="#search" className="hover:text-white">Arama</a>
+      <a href="#hotels" className="hover:text-white">Oteller</a>
+      <a href="#map" className="hover:text-white">Harita</a>
+      <a href="#faq" className="hover:text-white">SSS</a>
+    </nav>
+
+    {/* Sağ buton */}
+    <a
+      href="#search"
+      className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-teal-300 text-slate-900 font-semibold hover:bg-teal-200 transition"
+    >
+      Fiyatları Gör
+    </a>
+  </div>
+</header>
+
 
       {/* Hero */}
       <section className="relative overflow-hidden">

@@ -197,79 +197,87 @@ export default function Paket12TrendyEcom() {
       {/* Promo bar */}
       <div className="bg-orange-600 text-white text-sm">
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center gap-4">
-          <span className="font-semibold">Kargo Bedava</span>
-          <span className="opacity-95">₺1.000 üzeri siparişlerde</span>
+          <span className="font-semibold">Baksoft </span>
+          <span className="opacity-95"> ·  Özelleştirilebilir Tasarım No:8</span>
         </div>
       </div>
 
-      {/* Top bar */}
-      <header className="sticky top-0 z-40 border-b bg-white">
-        <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md bg-gradient-to-br from-orange-500 to-amber-500" />
-            <div className="font-semibold tracking-wide">Baksoft · Market</div>
-          </div>
+     <header className="sticky top-0 z-40 border-b bg-white">
+  <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
+    {/* Logo + Marka */}
+    <a
+      href="/paketler"
+      className="flex items-center gap-2"
+    >
+      <img
+        src="/baksoftLogo.png"
+        alt="Baksoft Logo"
+        className="h-8 w-8 object-contain"
+      />
+      <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
+    </a>
 
-          {/* Search */}
-          <div className="relative flex-1 max-w-3xl ml-4">
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Ürün, kategori veya marka ara"
-              className="w-full h-12 rounded-full border border-neutral-300 px-5 pr-28 bg-white placeholder:text-neutral-500 text-[15px]"
-            />
-            <button className="absolute right-1 top-1 h-10 px-5 rounded-full bg-orange-600 text-white text-sm font-medium hover:bg-orange-700">
-              Ara
-            </button>
-          </div>
+    {/* Search */}
+    <div className="relative flex-1 max-w-3xl ml-4">
+      <input
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        placeholder="Ürün, kategori veya marka ara"
+        className="w-full h-12 rounded-full border border-neutral-300 px-5 pr-28 bg-white placeholder:text-neutral-500 text-[15px]"
+      />
+      <button className="absolute right-1 top-1 h-10 px-5 rounded-full bg-orange-600 text-white text-sm font-medium hover:bg-orange-700">
+        Ara
+      </button>
+    </div>
 
-          <div className="ml-auto flex items-center gap-2">
-            <button
-              onClick={() => setCartOpen(true)}
-              className="relative rounded-xl border border-neutral-300 px-4 py-2 text-sm font-medium hover:bg-neutral-50"
-              aria-label="Sepet"
-            >
-              Sepet
-              {cart.length ? (
-                <span className="absolute -top-2 -right-2 h-5 min-w-5 px-1 rounded-full bg-orange-600 text-white text-xs grid place-items-center">
-                  {cart.length}
-                </span>
-              ) : null}
-            </button>
-          </div>
-        </div>
+    <div className="ml-auto flex items-center gap-2">
+      <button
+        onClick={() => setCartOpen(true)}
+        className="relative rounded-xl border border-neutral-300 px-4 py-2 text-sm font-medium hover:bg-neutral-50"
+        aria-label="Sepet"
+      >
+        Sepet
+        {cart.length ? (
+          <span className="absolute -top-2 -right-2 h-5 min-w-5 px-1 rounded-full bg-orange-600 text-white text-xs grid place-items-center">
+            {cart.length}
+          </span>
+        ) : null}
+      </button>
+    </div>
+  </div>
 
-        {/* Category pills + sort */}
-        <div className="mx-auto max-w-7xl px-4 pb-3 flex items-center gap-2 overflow-x-auto">
-          {categories.map((c) => (
-            <button
-              key={c}
-              onClick={() => setCat(c)}
-              className={
-                'px-3 py-1.5 rounded-full border text-sm font-medium ' +
-                (cat === c
-                  ? 'bg-orange-600 border-orange-600 text-white'
-                  : 'bg-white border-neutral-300 text-neutral-800 hover:bg-neutral-50')
-              }
-            >
-              {c}
-            </button>
-          ))}
-          <div className="ml-auto flex items-center gap-2">
-            <label className="text-sm text-neutral-700">Sırala:</label>
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value as any)}
-              className="h-10 rounded-lg border border-neutral-300 px-2 text-sm bg-white"
-            >
-              <option value="pop">Öne Çıkanlar</option>
-              <option value="new">Yeni Gelenler</option>
-              <option value="low">Fiyat Artan</option>
-              <option value="high">Fiyat Azalan</option>
-            </select>
-          </div>
-        </div>
-      </header>
+  {/* Category pills + sort */}
+  <div className="mx-auto max-w-7xl px-4 pb-3 flex items-center gap-2 overflow-x-auto">
+    {categories.map((c) => (
+      <button
+        key={c}
+        onClick={() => setCat(c)}
+        className={
+          'px-3 py-1.5 rounded-full border text-sm font-medium ' +
+          (cat === c
+            ? 'bg-orange-600 border-orange-600 text-white'
+            : 'bg-white border-neutral-300 text-neutral-800 hover:bg-neutral-50')
+        }
+      >
+        {c}
+      </button>
+    ))}
+    <div className="ml-auto flex items-center gap-2">
+      <label className="text-sm text-neutral-700">Sırala:</label>
+      <select
+        value={sort}
+        onChange={(e) => setSort(e.target.value as any)}
+        className="h-10 rounded-lg border border-neutral-300 px-2 text-sm bg-white"
+      >
+        <option value="pop">Öne Çıkanlar</option>
+        <option value="new">Yeni Gelenler</option>
+        <option value="low">Fiyat Artan</option>
+        <option value="high">Fiyat Azalan</option>
+      </select>
+    </div>
+  </div>
+</header>
+
 
       {/* Layout */}
       <div className="mx-auto max-w-7xl px-4 py-6 md:py-10 grid grid-cols-12 gap-6">

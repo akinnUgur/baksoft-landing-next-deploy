@@ -2,24 +2,48 @@ export default function Paket9RestaurantColorful() {
   return (
     <main className="min-h-[100dvh] bg-gradient-to-b from-rose-50 via-white to-emerald-50 text-slate-900">
       {/* Üst Bar */}
-      <header className="sticky top-0 z-20 border-b bg-white/70 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="h-5 w-5 rounded-full bg-gradient-to-br from-rose-600 to-emerald-600" />
-            <span className="font-semibold tracking-wide">Baksoft · RossoVerde Trattoria</span>
-          </div>
-          <nav className="hidden md:flex gap-6 text-sm text-slate-600">
-            <a href="#menu" className="hover:text-slate-900">Menü</a>
-            <a href="#seckiler" className="hover:text-slate-900">Şefin Seçkileri</a>
-            <a href="#rezervasyon" className="hover:text-slate-900">Rezervasyon</a>
-            <a href="#galeri" className="hover:text-slate-900">Galeri</a>
-            <a href="#iletisim" className="hover:text-slate-900">İletişim</a>
-          </nav>
-          <a href="#rezervasyon" className="rounded-xl px-3 py-1.5 text-sm bg-rose-600 text-white hover:bg-rose-700 transition">
-            Masa Ayırt
-          </a>
+
+       {/* Top strip */}
+      <div className="text-xs" style={{ background: 'var(--ink)', color: 'var(--bg)' }}>
+        <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
+          <span>Baksoft · Özelleştirilebilir Tasarım No:5</span>
+          <span className="opacity-80">Edition • <b>Concept</b></span>
         </div>
-      </header>
+      </div>
+      <header className="sticky top-0 z-20 border-b bg-white/70 backdrop-blur">
+  <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
+    {/* Logo + Marka */}
+    <a
+      href="/paketler"
+      className="flex items-center gap-2"
+    >
+      <img
+        src="/baksoftLogo.png"
+        alt="Baksoft Logo"
+        className="h-5 w-5 object-contain"
+      />
+      <span className="font-semibold tracking-wide">Baksoft Tasarım</span>
+    </a>
+
+    {/* Menü */}
+    <nav className="hidden md:flex gap-6 text-sm text-slate-600">
+      <a href="#menu" className="hover:text-slate-900">Menü</a>
+      <a href="#seckiler" className="hover:text-slate-900">Şefin Seçkileri</a>
+      <a href="#rezervasyon" className="hover:text-slate-900">Rezervasyon</a>
+      <a href="#galeri" className="hover:text-slate-900">Galeri</a>
+      <a href="#iletisim" className="hover:text-slate-900">İletişim</a>
+    </nav>
+
+    {/* Sağ buton */}
+    <a
+      href="#rezervasyon"
+      className="rounded-xl px-3 py-1.5 text-sm bg-rose-600 text-white hover:bg-rose-700 transition"
+    >
+      Masa Ayırt
+    </a>
+  </div>
+</header>
+
 
       {/* HERO */}
       <section className="relative overflow-hidden">

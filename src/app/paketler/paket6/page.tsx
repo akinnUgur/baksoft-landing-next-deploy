@@ -2,24 +2,48 @@ export default function Paket10CoffeeHouse() {
   return (
     <main className="min-h-[100dvh] bg-gradient-to-b from-emerald-950 via-emerald-980 to-stone-950 text-stone-100">
       {/* ÜST BAR */}
-      <header className="sticky top-0 z-20 border-b border-white/10 backdrop-blur bg-emerald-950/70">
-        <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="h-5 w-5 rounded-full bg-gradient-to-br from-emerald-500 to-amber-500" />
-            <span className="font-semibold tracking-wide">Baksoft · Verde & Cacao Coffee</span>
-          </div>
-          <nav className="hidden md:flex gap-6 text-sm text-stone-300">
-            <a href="#menu" className="hover:text-white">Menü</a>
-            <a href="#signature" className="hover:text-white">Öne Çıkanlar</a>
-            <a href="#order" className="hover:text-white">Sipariş</a>
-            <a href="#gallery" className="hover:text-white">Galeri</a>
-            <a href="#contact" className="hover:text-white">İletişim</a>
-          </nav>
-          <a href="#order" className="rounded-xl px-3 py-1.5 text-sm bg-emerald-600 text-white hover:bg-emerald-500 transition">
-            Şimdi Sipariş Ver
-          </a>
+ {/* Top strip */}
+      <div className="text-xs" style={{ background: 'var(--ink)', color: 'var(--bg)' }}>
+        <div className="mx-auto max-w-7xl px-5 py-2 flex items-center justify-between">
+          <span>Baksoft · Özelleştirilebilir Tasarım No:6</span>
+          <span className="opacity-80">Edition • <b>Concept</b></span>
         </div>
-      </header>
+      </div>
+
+      <header className="sticky top-0 z-20 border-b border-white/10 backdrop-blur bg-emerald-950/70">
+  <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
+    {/* Logo + Marka */}
+    <a
+      href="/paketler"
+      className="flex items-center gap-2"
+    >
+      <img
+        src="/baksoftLogo.png"
+        alt="Baksoft Logo"
+        className="h-5 w-5 object-contain"
+      />
+      <span className="font-semibold tracking-wide">Baksoft Tasarım </span>
+    </a>
+
+    {/* Menü */}
+    <nav className="hidden md:flex gap-6 text-sm text-stone-300">
+      <a href="#menu" className="hover:text-white">Menü</a>
+      <a href="#signature" className="hover:text-white">Öne Çıkanlar</a>
+      <a href="#order" className="hover:text-white">Sipariş</a>
+      <a href="#gallery" className="hover:text-white">Galeri</a>
+      <a href="#contact" className="hover:text-white">İletişim</a>
+    </nav>
+
+    {/* Sağ buton */}
+    <a
+      href="#order"
+      className="rounded-xl px-3 py-1.5 text-sm bg-emerald-600 text-white hover:bg-emerald-500 transition"
+    >
+      Şimdi Sipariş Ver
+    </a>
+  </div>
+</header>
+
 
       {/* HERO */}
       <section className="relative overflow-hidden">
