@@ -1,4 +1,5 @@
-'use client';
+// src/app/components/PreviewOverlay.tsx
+"use client";
 
 import { useEffect, useMemo, useState } from 'react';
 import ImgSafe from './ImgSafe';
@@ -17,6 +18,17 @@ export default function PreviewOverlay({
   const [loading, setLoading] = useState(false);
   const [frameFailed, setFrameFailed] = useState(false);
 
+  // ✅ Mobil tespiti: sm altı (≤639px) ise render etme
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mql = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsMobile(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+
   // preview değişince yeniden hesaplanır (dependency: preview)
   const frameSrc = useMemo(() => {
     if (!preview) return '';
@@ -32,7 +44,7 @@ export default function PreviewOverlay({
     if (!frameSrc) return;
     setLoading(true);
     setFrameFailed(false);
-    const id = window.setTimeout(() => setFrameFailed(true), 3500);
+    const id = window.setTimeout(() => setFrameFailed(true), 300000);
     return () => window.clearTimeout(id);
   }, [frameSrc]);
 
@@ -44,9 +56,10 @@ export default function PreviewOverlay({
   }, [onClose]);
 
   if (!preview) return null;
+  if (isMobile) return null; // ✅ Mobilde hiç render etme
 
   return (
-    <div className="fixed inset-0 z-50">
+    <div className="fixed inset-0 z-50 hidden sm:block">{/* ✅ Ek güvence: CSS ile de gizle */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm z-10" onClick={onClose} />
       <div
         className="absolute inset-x-0 top-10 mx-auto max-w-6xl rounded-2xl border bg-white shadow-2xl overflow-hidden z-20 will-change-transform"
@@ -87,6 +100,7 @@ export default function PreviewOverlay({
                 setFrameFailed(false);
               }}
               title={`Önizleme: ${preview.title}`}
+              sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads"
             />
 
             {frameFailed && (
