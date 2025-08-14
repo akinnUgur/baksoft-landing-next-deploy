@@ -17,6 +17,15 @@ export default function PackageCarousel({
   useEffect(() => setMounted(true), []);
   // Light moddaysa koyu, dark moddaysa açık yüzey kullan (ters mantık)
   const isDarkSurface = (mounted ? resolvedTheme : "light") === "light";
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mql = window.matchMedia("(max-width: 639px)"); // sm breakpoint altı
+    const update = () => setIsMobile(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
 
   const GAP = 16;
   const clones = 3;
@@ -58,13 +67,13 @@ export default function PackageCarousel({
 
   const tx = (i: number) => -(i * (cardW + GAP));
 
-useEffect(() => {
-  if (!trackRef.current) return;
-  trackRef.current.style.transition = anim
-    ? "transform 420ms cubic-bezier(.22,.61,.36,1)"
-    : "none";
-  trackRef.current.style.transform = `translateX(${-(idx * (cardW + GAP))}px)`; // ✅ tx yok
-}, [idx, anim, cardW]); // bağımlılıklar aynı
+  useEffect(() => {
+    if (!trackRef.current) return;
+    trackRef.current.style.transition = anim
+      ? "transform 420ms cubic-bezier(.22,.61,.36,1)"
+      : "none";
+    trackRef.current.style.transform = `translateX(${-(idx * (cardW + GAP))}px)`; // ✅ tx yok
+  }, [idx, anim, cardW]); // bağımlılıklar aynı
 
 
   useEffect(() => {
@@ -209,13 +218,32 @@ useEffect(() => {
                 className={`group shrink-0 w-[82vw] sm:w-[340px] md:w-[360px] lg:w-[380px] rounded-2xl overflow-hidden border backdrop-blur-sm relative ${cardBox}`}
               >
                 <div className="relative">
-                  <ImgSafe src={p.cover} alt={p.title} className="w-full h-[180px] sm:h-[200px] object-cover" />
+                  {p.cover.startsWith("css:") ? (
+                    <div
+                      className="relative w-full h-[180px] sm:h-[200px] flex items-center justify-center text-center"
+                      style={{ background: p.cover.slice(4) }}
+                    >
+                      {/* Yazı katmanı */}
+                      <div className="absolute inset-0 bg-black/30" /> {/* hafif karartma */}
+                      <div className="relative z-10 px-3">
+                        <h3 className="text-lg font-bold text-white drop-shadow">{p.title}</h3>
+                        <p className="text-sm text-white/90 drop-shadow">{p.subtitle}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <ImgSafe
+                      src={p.cover}
+                      alt={p.title}
+                      className="w-full h-[180px] sm:h-[200px] object-cover"
+                    />
+                  )}
+
+
                   <span
-                    className={`absolute left-3 top-3 text-[11px] px-2 py-1 rounded-full border ${
-                      isDarkSurface
-                        ? "bg-black/60 border-white/10 text-white/90"
-                        : "bg-white/90 border-black/10 text-slate-700"
-                    }`}
+                    className={`absolute left-3 top-3 text-[11px] px-2 py-1 rounded-full border ${isDarkSurface
+                      ? "bg-black/60 border-white/10 text-white/90"
+                      : "bg-white/90 border-black/10 text-slate-700"
+                      }`}
                   >
                     {p.vibe}
                   </span>
@@ -241,13 +269,16 @@ useEffect(() => {
                   </div>
 
                   <div className="mt-4 flex items-center gap-2">
-                    <button onClick={() => onPreview?.(p)} className={`h-10 px-4 rounded-xl font-medium ${btnPrimary}`}>
-                      Önizle
-                    </button>
-                    <a href={p.slug} className={`h-10 px-4 rounded-xl border grid place-items-center ${btnGhost}`}>
-                      Detay
-                    </a>
-                  </div>
+  {!isMobile && (
+    <button onClick={() => onPreview?.(p)} className={`h-10 px-4 rounded-xl font-medium ${btnPrimary}`}>
+      Önizle
+    </button>
+  )}
+  <a href={p.slug} className={`h-10 px-4 rounded-xl border grid place-items-center ${btnGhost}`}>
+    Detay
+  </a>
+</div>
+
                 </div>
 
                 <div

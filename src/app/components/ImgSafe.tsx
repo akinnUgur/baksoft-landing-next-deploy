@@ -54,6 +54,20 @@ export default function ImgSafe({
         />
       </div>
     );
+  }if (typeof src === "string" && src.startsWith("css:")) {
+    return (
+      <div
+        role="img"
+        aria-label={alt}
+        className={`relative overflow-hidden ${className ?? ""}`}
+        style={{
+          background: src.slice(4),
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        data-cssbg
+      />
+    );
   }
 
   const hasW = typeof width === "number";

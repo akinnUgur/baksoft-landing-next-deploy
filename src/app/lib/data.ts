@@ -19,50 +19,51 @@ export const PACKAGES: PackageItem[] = [
 
 /* ========================= CAROUSEL ========================= */
 export const CAROUSEL_ITEMS: CarouselItem[] = [
-  { slug: "/paketler/paket1",  title: "Baksoft Paket 1",  subtitle: "Portföy / Proje", vibe: "Editorial",
-    cover: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1600", // ALT: /images/paketler/paket1/cover.jpg
+  { slug: "/paketler/paket1",  title: "Baksoft Paket 1",  subtitle: "Mimarlık / Proje", vibe: "Editorial",
+    cover: "css:linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%)",
     chips: ["landing","pages_4_10","gallery"] },
 
   { slug: "/paketler/paket2",  title: "Baksoft Paket 2",  subtitle: "Restoran", vibe: "Premium",
-    cover: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1600",   // ALT: /images/paketler/paket2/cover.jpg
+    cover: "css:linear-gradient(135deg, #fb923c 0%, #ef4444 100%)",
     chips: ["landing","booking","gallery"] },
 
   { slug: "/paketler/paket3",  title: "Baksoft Paket 3",  subtitle: "Kafe", vibe: "Minimal",
-    cover: "https://images.pexels.com/photos/230477/pexels-photo-230477.jpeg?auto=compress&cs=tinysrgb&w=1600",   // ALT: /images/paketler/paket3/cover.jpg
+    cover: "css:linear-gradient(135deg, #6b4226 0%, #14532d 100%)",
     chips: ["landing","gallery"] },
 
   { slug: "/paketler/paket4",  title: "Baksoft Paket 4",  subtitle: "Güzellik", vibe: "Editorial",
-    cover: "https://images.pexels.com/photos/3865676/pexels-photo-3865676.jpeg?auto=compress&cs=tinysrgb&w=1600", // ALT: /images/paketler/paket4/cover.jpg
+    cover: "css:linear-gradient(135deg, #f0abfc 0%, #a78bfa 100%)",
     chips: ["landing","membership","booking"] },
 
   { slug: "/paketler/paket5",  title: "Baksoft Paket 5",  subtitle: "Restoran", vibe: "Premium",
-    cover: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1600",   // ALT: /images/paketler/paket5/cover.jpg
+    cover: "css:linear-gradient(135deg, #1f2937 0%, #b45309 100%)",
     chips: ["landing","booking"] },
 
   { slug: "/paketler/paket6",  title: "Baksoft Paket 6",  subtitle: "Kafe", vibe: "Minimal",
-    cover: "https://images.pexels.com/photos/2240762/pexels-photo-2240762.jpeg?auto=compress&cs=tinysrgb&w=1600", // ALT: /images/paketler/paket6/cover.jpg
+    cover: "css:linear-gradient(135deg, #f59e0b 0%, #65a30d 100%)",
     chips: ["landing"] },
 
   { slug: "/paketler/paket7",  title: "Baksoft Paket 7",  subtitle: "Rent-a-Car", vibe: "Premium",
-    cover: "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=1600",   // ALT: /images/paketler/paket7/cover.jpg
+    cover: "css:linear-gradient(135deg, #374151 0%, #fbbf24 100%)",
     chips: ["pages_4_10","booking","gallery"] },
 
   { slug: "/paketler/paket8",  title: "Baksoft Paket 8",  subtitle: "E-Ticaret", vibe: "Sport",
-    cover: "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1600", // ALT: /images/paketler/paket8/cover.jpg
+    cover: "css:linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)",
     chips: ["commerce","cart","blog"] },
 
   { slug: "/paketler/paket9",  title: "Baksoft Paket 9",  subtitle: "Spor Salonu", vibe: "Sport",
-    cover: "https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1600", // ALT: /images/paketler/paket9/cover.jpg
+    cover: "css:linear-gradient(135deg, #111827 0%, #ef4444 100%)",
     chips: ["pages_4_10","membership","booking"] },
 
   { slug: "/paketler/paket10", title: "Baksoft Paket 10", subtitle: "Klinik", vibe: "Editorial",
-    cover: "https://images.pexels.com/photos/3845762/pexels-photo-3845762.jpeg?auto=compress&cs=tinysrgb&w=1600", // ALT: /images/paketler/paket10/cover.jpg
+    cover: "css:linear-gradient(135deg, #14b8a6 0%, #99f6e4 100%)",
     chips: ["pages_4_10","booking","gallery"] },
 
   { slug: "/paketler/paket11", title: "Baksoft Paket 11", subtitle: "Otel", vibe: "Premium",
-    cover: "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1600",   // ALT: /images/paketler/paket11/cover.jpg
+    cover: "css:linear-gradient(135deg, #0f172a 0%, #d97706 100%)",
     chips: ["pages_4_10","booking","gallery"] },
 ];
+
 
 /* ========================= STORIES ========================= */
 export const STORIES: Story[] = [
