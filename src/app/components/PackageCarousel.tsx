@@ -58,11 +58,14 @@ export default function PackageCarousel({
 
   const tx = (i: number) => -(i * (cardW + GAP));
 
-  useEffect(() => {
-    if (!trackRef.current) return;
-    trackRef.current.style.transition = anim ? "transform 420ms cubic-bezier(.22,.61,.36,1)" : "none";
-    trackRef.current.style.transform = `translateX(${tx(idx)}px)`;
-  }, [idx, anim, cardW]);
+useEffect(() => {
+  if (!trackRef.current) return;
+  trackRef.current.style.transition = anim
+    ? "transform 420ms cubic-bezier(.22,.61,.36,1)"
+    : "none";
+  trackRef.current.style.transform = `translateX(${-(idx * (cardW + GAP))}px)`; // ✅ tx yok
+}, [idx, anim, cardW]); // bağımlılıklar aynı
+
 
   useEffect(() => {
     const node = trackRef.current;

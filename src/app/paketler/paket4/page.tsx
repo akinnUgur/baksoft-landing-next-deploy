@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Image from 'next/image';
 
 /**
  * Paket17 · Beauty/Aesthetics — FULL (tek dosya)
@@ -10,6 +11,8 @@ import { useMemo, useState } from 'react';
  * - Before/After slider (2 örnek)
  * - Glow Club (üyelik planları, faydalar, seans sayacı, referans/voucher mock)
  * - Tüm img'lerde ImgSafe fallback (görsel bozulsa da UI kırılmaz)
+ *
+ * Görseller: /public/merkez/merkez-1..5.webp (yerel)
  */
 
 /* ============================ Types ============================ */
@@ -44,56 +47,39 @@ type Plan = {
   color: string; // for accent ring/bg
 };
 
+/* ============================ Local image pool ============================ */
+const LOCAL_IMG = [
+  '/merkez/merkez-1.webp',
+  '/merkez/merkez-2.webp',
+  '/merkez/merkez-3.webp',
+  '/merkez/merkez-4.webp',
+  '/merkez/merkez-5.webp',
+];
+const pick = (i: number) => LOCAL_IMG[i % LOCAL_IMG.length];
+
 /* ============================ Data ============================ */
 const PRESETS: StylePreset[] = [
   {
     key: 'Glow',
     name: 'Glow',
-    palette: {
-      bg: '#fbf7f6',
-      ink: '#0b1220',
-      accent: '#b55f74',
-      soft: '#f1e5e7',
-    },
-    collage: [
-      'https://images.pexels.com/photos/8089979/pexels-photo-8089979.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      'https://images.pexels.com/photos/3738348/pexels-photo-3738348.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      'https://images.pexels.com/photos/3997987/pexels-photo-3997987.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    ],
+    palette: { bg: '#fbf7f6', ink: '#0b1220', accent: '#b55f74', soft: '#f1e5e7' },
+    collage: [pick(0), pick(1), pick(2)],
     textureClass:
       'bg-[radial-gradient(60%_40%_at_12%_0%,rgba(212,154,166,0.12),transparent),radial-gradient(40%_30%_at_100%_0%,rgba(42,42,42,0.06),transparent)]',
   },
   {
     key: 'Botanical',
     name: 'Botanical',
-    palette: {
-      bg: '#f6faf7',
-      ink: '#0b1e14',
-      accent: '#4d8a71',
-      soft: '#e6f0ea',
-    },
-    collage: [
-      'https://images.pexels.com/photos/6620894/pexels-photo-6620894.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      'https://images.pexels.com/photos/6620922/pexels-photo-6620922.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      'https://images.pexels.com/photos/6620932/pexels-photo-6620932.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    ],
+    palette: { bg: '#f6faf7', ink: '#0b1e14', accent: '#4d8a71', soft: '#e6f0ea' },
+    collage: [pick(2), pick(3), pick(4)],
     textureClass:
       'bg-[radial-gradient(60%_40%_at_10%_0%,rgba(115,165,139,0.12),transparent),radial-gradient(40%_30%_at_100%_0%,rgba(18,32,24,0.06),transparent)]',
   },
   {
     key: 'Noir',
     name: 'Noir',
-    palette: {
-      bg: '#101012',
-      ink: '#f2f2f4',
-      accent: '#c1a16b',
-      soft: '#1a1b1e',
-    },
-    collage: [
-      'https://images.pexels.com/photos/3865676/pexels-photo-3865676.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      'https://images.pexels.com/photos/4156442/pexels-photo-4156442.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      'https://images.pexels.com/photos/4152177/pexels-photo-4152177.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    ],
+    palette: { bg: '#101012', ink: '#f2f2f4', accent: '#c1a16b', soft: '#1a1b1e' },
+    collage: [pick(4), pick(0), pick(3)],
     textureClass:
       'bg-[radial-gradient(60%_40%_at_15%_0%,rgba(193,161,107,0.14),transparent),radial-gradient(40%_30%_at_100%_0%,rgba(242,242,244,0.05),transparent)]',
   },
@@ -107,10 +93,8 @@ const RITUALS: Ritual[] = [
     tags: ['Hassas', 'Anti-Aging'],
     minutes: 60,
     price: 1550,
-    desc:
-      'Enzim peeling + LED ışık + hyaluronik maske. Cildi yatıştırıp parlaklık verir.',
-    image:
-      'https://images.pexels.com/photos/3738348/pexels-photo-3738348.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    desc: 'Enzim peeling + LED ışık + hyaluronik maske. Cildi yatıştırıp parlaklık verir.',
+    image: pick(0),
   },
   {
     id: 'r-detox',
@@ -119,10 +103,8 @@ const RITUALS: Ritual[] = [
     tags: ['Detox', 'Hamile Uygun'],
     minutes: 50,
     price: 1350,
-    desc:
-      'Bitkisel özlerle arındırıcı masaj ve maske. Koku profili hafif ve rahatlatıcı.',
-    image:
-      'https://images.pexels.com/photos/6620894/pexels-photo-6620894.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    desc: 'Bitkisel özlerle arındırıcı masaj ve maske. Koku profili hafif ve rahatlatıcı.',
+    image: pick(2),
   },
   {
     id: 'r-lift',
@@ -131,10 +113,8 @@ const RITUALS: Ritual[] = [
     tags: ['Medikal', 'Anti-Aging'],
     minutes: 75,
     price: 1950,
-    desc:
-      'Mikro akım ve manuel lifting ile kontür belirginliği. Boyun/dekolte dahil.',
-    image:
-      'https://images.pexels.com/photos/4156442/pexels-photo-4156442.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    desc: 'Mikro akım ve manuel lifting ile kontür belirginliği. Boyun/dekolte dahil.',
+    image: pick(2),
   },
   {
     id: 'r-aroma',
@@ -143,10 +123,8 @@ const RITUALS: Ritual[] = [
     tags: ['Detox'],
     minutes: 60,
     price: 1290,
-    desc:
-      'Sirkülasyonu artıran aroma yağlarıyla bütünsel vücut masajı. Ritmik ve dingin.',
-    image:
-      'https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    desc: 'Sirkülasyonu artıran aroma yağlarıyla bütünsel vücut masajı. Ritmik ve dingin.',
+    image: pick(3),
   },
   {
     id: 'r-silk',
@@ -155,10 +133,8 @@ const RITUALS: Ritual[] = [
     tags: ['Hassas'],
     minutes: 45,
     price: 1150,
-    desc:
-      'Nazik vücut peelingi + nem maskesi. İpek hissi, pürüzsüz dokunuş.',
-    image:
-      'https://images.pexels.com/photos/3865676/pexels-photo-3865676.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    desc: 'Nazik vücut peelingi + nem maskesi. İpek hissi, pürüzsüz dokunuş.',
+    image: pick(4),
   },
   {
     id: 'r-led',
@@ -167,35 +143,15 @@ const RITUALS: Ritual[] = [
     tags: ['Medikal'],
     minutes: 25,
     price: 700,
-    desc:
-      'Kırmızı/mavi LED dalga boylarıyla kollajen uyarımı ve arındırma. Cilt bakımına eklenti.',
-    image:
-      'https://images.pexels.com/photos/3997987/pexels-photo-3997987.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    desc: 'Kırmızı/mavi LED dalga boylarıyla kollajen uyarımı ve arındırma. Cilt bakımına eklenti.',
+    image: pick(1),
   },
 ];
 
 const PLANS: Plan[] = [
-  {
-    id: 'basic',
-    name: 'Glow Basic',
-    monthly: 490,
-    perks: ['Aylık 1 LED seansı', 'Ritüellerde %10', 'Doğum günü mini set'],
-    color: '#d49aa6',
-  },
-  {
-    id: 'pro',
-    name: 'Glow Pro',
-    monthly: 890,
-    perks: ['Aylık 1 Signature Glow', 'LED sınırsız', 'Ritüellerde %15', 'Öncelikli slot'],
-    color: '#73a58b',
-  },
-  {
-    id: 'elite',
-    name: 'Glow Elite',
-    monthly: 1490,
-    perks: ['Aylık 2 ileri ritüel', 'VIP oda', 'Ritüellerde %20', 'Arkadaşına 2 hediye kupon'],
-    color: '#c1a16b',
-  },
+  { id: 'basic', name: 'Glow Basic', monthly: 490, perks: ['Aylık 1 LED seansı', 'Ritüellerde %10', 'Doğum günü mini set'], color: '#d49aa6' },
+  { id: 'pro', name: 'Glow Pro', monthly: 890, perks: ['Aylık 1 Signature Glow', 'LED sınırsız', 'Ritüellerde %15', 'Öncelikli slot'], color: '#73a58b' },
+  { id: 'elite', name: 'Glow Elite', monthly: 1490, perks: ['Aylık 2 ileri ritüel', 'VIP oda', 'Ritüellerde %20', 'Arkadaşına 2 hediye kupon'], color: '#c1a16b' },
 ];
 
 /* ============================ Helpers ============================ */
@@ -208,12 +164,12 @@ export default function Paket17BeautyFull() {
   const [ambience, setAmbience] = useState(70);
   const active = useMemo(() => PRESETS.find((p) => p.key === style)!, [style]);
 
-  const cssVars: React.CSSProperties = {
+  const cssVars = {
     ['--bg' as any]: active.palette.bg,
     ['--ink' as any]: active.palette.ink,
     ['--accent' as any]: active.palette.accent,
     ['--soft' as any]: active.palette.soft,
-  };
+  } as any;
 
   // Ritual filters
   const [cat, setCat] = useState<Category | 'Tümü'>('Tümü');
@@ -239,7 +195,6 @@ export default function Paket17BeautyFull() {
         arr.sort((a, b) => a.minutes - b.minutes);
         break;
       default:
-        // pop mock: by price desc as proxy
         arr.sort((a, b) => b.price - a.price);
     }
     return arr;
@@ -254,84 +209,70 @@ export default function Paket17BeautyFull() {
 
   return (
     <main
-  className="min-h-[100dvh] text-slate-900"
-  style={{ ...cssVars, background: 'var(--bg)', overflowX: 'clip' }}
->
+      className="min-h-[100dvh]"
+      style={{ ...cssVars, background: 'var(--bg)', color: 'var(--ink)', overflowX: 'clip' }}
+    >
       {/* Top strip */}
       <div className="text-xs" style={{ background: 'var(--ink)', color: 'var(--bg)' }}>
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
           <span>Baksoft · Özelleştirilebilir Tasarım No:4</span>
-          <span className="opacity-80">Edition • <b>Concept</b></span>
+          <span className="opacity-80">
+            Edition • <b>Concept</b>
+          </span>
         </div>
       </div>
 
       {/* Header */}
       <header
-  className="sticky top-0 z-30 border-b backdrop-blur"
-  style={{
-    background: 'color-mix(in oklab, var(--bg) 92%, transparent)',
-    borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)',
-  }}
->
-  <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
-    {/* Logo + Marka */}
-    <a
-      href="/paketler"
-      className="flex items-center gap-3"
-    >
-      <img
-        src="/baksoftLogo.png"
-        alt="Baksoft Logo"
-        className="h-8 w-8 object-contain"
-      />
-      <div className="font-serif text-lg font-semibold tracking-tight">
-        Baksoft Tasarım
-      </div>
-    </a>
-
-    {/* Menü */}
-    <nav className="hidden md:flex ml-6 gap-6 text-sm opacity-80">
-      <a href="#editorial" className="hover:opacity-100">Editoryal</a>
-      <a href="#rituals" className="hover:opacity-100">Ritüeller</a>
-      <a href="#beforeafter" className="hover:opacity-100">Önce/Sonra</a>
-      <a href="#club" className="hover:opacity-100">Glow Club</a>
-    </nav>
-
-    {/* Style selector */}
-    <div className="ml-auto flex items-center gap-2">
-      <span className="text-xs opacity-70">Stil:</span>
-      <div
-        className="rounded-xl border p-1 flex gap-1"
+        className="sticky top-0 z-30 border-b backdrop-blur"
         style={{
-          borderColor: 'color-mix(in oklab, var(--ink) 15%, transparent)',
-          background: 'color-mix(in oklab, var(--soft) 60%, transparent)',
+          background: 'color-mix(in oklab, var(--bg) 92%, transparent)',
+          borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)',
         }}
       >
-        {PRESETS.map((p) => (
-          <button
-            key={p.key}
-            onClick={() => setStyle(p.key)}
-            className="px-3 h-8 rounded-lg text-sm"
-            style={{
-              color:
-                style === p.key
-                  ? (p.key === 'Noir' ? '#101012' : '#111827')
-                  : 'color-mix(in oklab, var(--ink) 90%, transparent)',
-              background: style === p.key ? 'var(--accent)' : 'transparent',
-              border:
-                style === p.key
-                  ? '1px solid color-mix(in oklab, var(--ink) 10%, transparent)'
-                  : '1px solid transparent',
-            }}
-          >
-            {p.name}
-          </button>
-        ))}
-      </div>
-    </div>
-  </div>
-</header>
+        <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
+          {/* Logo + Marka */}
+          <a href="/paketler" className="flex items-center gap-3">
+            <Image src="/baksoftLogo.png" alt="Baksoft Logo" width={32} height={32} className="object-contain" />
+            <div className="font-serif text-lg font-semibold tracking-tight">Baksoft Tasarım</div>
+          </a>
 
+          {/* Menü */}
+          <nav className="hidden md:flex ml-6 gap-6 text-sm opacity-80">
+            <a href="#editorial" className="hover:opacity-100">Editoryal</a>
+            <a href="#rituals" className="hover:opacity-100">Ritüeller</a>
+            <a href="#beforeafter" className="hover:opacity-100">Önce/Sonra</a>
+            <a href="#club" className="hover:opacity-100">Glow Club</a>
+          </nav>
+
+          {/* Style selector */}
+          <div className="ml-auto flex items-center gap-2">
+            <span className="text-xs opacity-70">Stil:</span>
+            <div
+              className="rounded-xl border p-1 flex gap-1"
+              style={{
+                borderColor: 'color-mix(in oklab, var(--ink) 15%, transparent)',
+                background: 'color-mix(in oklab, var(--soft) 60%, transparent)',
+              }}
+            >
+              {PRESETS.map((p) => (
+                <button
+                  key={p.key}
+                  onClick={() => setStyle(p.key)}
+                  className="px-3 h-8 rounded-lg text-sm"
+                  style={{
+                    color: style === p.key ? (p.key === 'Noir' ? '#101012' : '#111827') : 'color-mix(in oklab, var(--ink) 90%, transparent)',
+                    background: style === p.key ? 'var(--accent)' : 'transparent',
+                    border: style === p.key ? '1px solid color-mix(in oklab, var(--ink) 10%, transparent)' : '1px solid transparent',
+                  }}
+                >
+                  {p.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </header>
 
       {/* HERO · Editorial */}
       <section
@@ -531,14 +472,21 @@ export default function Paket17BeautyFull() {
 
                 {/* Inline detail */}
                 {openRitual?.id === r.id && (
-                  <div className="mt-4 rounded-xl border p-3 text-sm"
+                  <div
+                    className="mt-4 rounded-xl border p-3 text-sm"
                     style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'color-mix(in oklab, var(--soft) 40%, transparent)' }}
                   >
                     <div className="opacity-80">{r.desc}</div>
                     <div className="mt-2 grid grid-cols-3 gap-2 text-xs">
-                      <div className="rounded-lg border p-2" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)' }}>Süre: <b>{r.minutes} dk</b></div>
-                      <div className="rounded-lg border p-2" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)' }}>Öneri: <b>Ayda 1</b></div>
-                      <div className="rounded-lg border p-2" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)' }}>Uygunluk: <b>{r.tags.includes('Hamile Uygun') ? 'Hamile uygun' : 'Genel'}</b></div>
+                      <div className="rounded-lg border p-2" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)' }}>
+                        Süre: <b>{r.minutes} dk</b>
+                      </div>
+                      <div className="rounded-lg border p-2" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)' }}>
+                        Öneri: <b>Ayda 1</b>
+                      </div>
+                      <div className="rounded-lg border p-2" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)' }}>
+                        Uygunluk: <b>{r.tags.includes('Hamile Uygun') ? 'Hamile uygun' : 'Genel'}</b>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -548,7 +496,10 @@ export default function Paket17BeautyFull() {
         </div>
 
         {!filtered.length && (
-          <div className="mt-10 rounded-2xl border p-8 text-center text-sm opacity-80" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'var(--bg)' }}>
+          <div
+            className="mt-10 rounded-2xl border p-8 text-center text-sm opacity-80"
+            style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'var(--bg)' }}
+          >
             Sonuç yok. Filtreleri gevşetmeyi deneyin.
           </div>
         )}
@@ -559,14 +510,8 @@ export default function Paket17BeautyFull() {
         <h2 className="text-3xl font-semibold font-serif">Önce / Sonra</h2>
         <p className="opacity-80 mt-1">Inline slider; tek hareketle farkı görün.</p>
         <div className="mt-5 grid md:grid-cols-2 gap-6">
-          <BeforeAfter
-            before="https://images.pexels.com/photos/373965/pexels-photo-373965.jpeg?auto=compress&cs=tinysrgb&w=1600"
-            after="https://images.pexels.com/photos/3738348/pexels-photo-3738348.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          />
-          <BeforeAfter
-            before="https://images.pexels.com/photos/279719/pexels-photo-279719.jpeg?auto=compress&cs=tinysrgb&w=1600"
-            after="https://images.pexels.com/photos/3997987/pexels-photo-3997987.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          />
+          <BeforeAfter before={pick(0)} after={pick(3)} />
+          <BeforeAfter before={pick(2)} after={pick(4)} />
         </div>
       </section>
 
@@ -577,7 +522,7 @@ export default function Paket17BeautyFull() {
             <h2 className="text-3xl font-semibold font-serif">Glow Club</h2>
             <p className="opacity-80 mt-1">Üyelikle ayrıcalıklar: indirim, öncelikli slot, hediye kuponlar.</p>
           </div>
-          <div className="shrink-0">
+        <div className="shrink-0">
             <select
               value={planId}
               onChange={(e) => setPlanId(e.target.value)}
@@ -601,19 +546,31 @@ export default function Paket17BeautyFull() {
 
         {/* Member utilities (demo) */}
         <div className="mt-8 grid lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-5 rounded-2xl p-5 border" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'color-mix(in oklab, var(--soft) 45%, transparent)' }}>
+          <div
+            className="lg:col-span-5 rounded-2xl p-5 border"
+            style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'color-mix(in oklab, var(--soft) 45%, transparent)' }}
+          >
             <div className="text-sm opacity-70">Seans Sayacı</div>
             <ProgressWidget sessions={sessions} setSessions={setSessions} />
           </div>
 
-          <div className="lg:col-span-7 rounded-2xl p-5 border" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'color-mix(in oklab, var(--soft) 45%, transparent)' }}>
+          <div
+            className="lg:col-span-7 rounded-2xl p-5 border"
+            style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'color-mix(in oklab, var(--soft) 45%, transparent)' }}
+          >
             <div className="text-sm opacity-70">Referans & Voucher</div>
             <div className="mt-3 grid md:grid-cols-2 gap-3 text-sm">
-              <div className="rounded-xl border p-4" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'var(--bg)' }}>
+              <div
+                className="rounded-xl border p-4"
+                style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'var(--bg)' }}
+              >
                 <div className="font-medium">Referans Kodu</div>
                 <div className="mt-1 text-xs opacity-70">Arkadaşın ilk ritüelde %15 indirime hak kazanır.</div>
                 <div className="mt-3 flex items-center gap-2">
-                  <code className="px-3 h-10 rounded-xl border grid place-items-center" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)' }}>
+                  <code
+                    className="px-3 h-10 rounded-xl border grid place-items-center"
+                    style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)' }}
+                  >
                     {voucher || '— — — — —'}
                   </code>
                   <button
@@ -625,12 +582,24 @@ export default function Paket17BeautyFull() {
                   </button>
                 </div>
               </div>
-              <div className="rounded-xl border p-4" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'var(--bg)' }}>
+              <div
+                className="rounded-xl border p-4"
+                style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)', background: 'var(--bg)' }}
+              >
                 <div className="font-medium">Hediye Kuponu</div>
                 <div className="mt-1 text-xs opacity-70">Seçili ritüellerde nakit yerine kupon kullanımı.</div>
                 <div className="mt-3 flex items-center gap-2">
-                  <input placeholder="Kupon kodu" className="h-10 flex-1 rounded-xl border px-3" style={{ borderColor: 'color-mix(in oklab, var(--ink) 15%, transparent)' }} />
-                  <button className="h-10 px-3 rounded-xl border" style={{ borderColor: 'color-mix(in oklab, var(--ink) 15%, transparent)', background: 'color-mix(in oklab, var(--soft) 50%, transparent)' }}>Uygula</button>
+                  <input
+                    placeholder="Kupon kodu"
+                    className="h-10 flex-1 rounded-xl border px-3"
+                    style={{ borderColor: 'color-mix(in oklab, var(--ink) 15%, transparent)' }}
+                  />
+                  <button
+                    className="h-10 px-3 rounded-xl border"
+                    style={{ borderColor: 'color-mix(in oklab, var(--ink) 15%, transparent)', background: 'color-mix(in oklab, var(--soft) 50%, transparent)' }}
+                  >
+                    Uygula
+                  </button>
                 </div>
               </div>
             </div>
@@ -652,7 +621,10 @@ export default function Paket17BeautyFull() {
       </footer>
 
       <style jsx global>{`
-        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
       `}</style>
     </main>
   );
@@ -704,8 +676,7 @@ function ImgSafe({ src, alt, className }: { src?: string; alt: string; className
       </div>
     );
   }
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} alt={alt} className={className} onError={() => setOk(false)} />;
+  return <Image src={src} width={512} height={512} alt={alt} className={className} onError={() => setOk(false)} />;
 }
 
 /* Before/After Slider */
@@ -746,7 +717,10 @@ function PlanCard({ plan, active, onPick }: { plan: Plan; active: boolean; onPic
       <div className="flex items-start justify-between">
         <div>
           <div className="font-semibold">{plan.name}</div>
-          <div className="text-3xl font-extrabold mt-1">{TL(plan.monthly)}<span className="text-sm opacity-70">/ay</span></div>
+          <div className="text-3xl font-extrabold mt-1">
+            {TL(plan.monthly)}
+            <span className="text-sm opacity-70">/ay</span>
+          </div>
         </div>
         <div className="h-8 w-8 rounded-lg" style={{ background: plan.color, opacity: 0.6 }} />
       </div>
@@ -777,14 +751,20 @@ function ProgressWidget({ sessions, setSessions }: { sessions: number; setSessio
     <div>
       <div className="flex items-center justify-between text-sm">
         <div className="opacity-80">Bu ay alınan</div>
-        <div className="font-medium">{sessions} / {target}</div>
+        <div className="font-medium">
+          {sessions} / {target}
+        </div>
       </div>
       <div className="mt-2 h-3 rounded-full overflow-hidden border" style={{ borderColor: 'color-mix(in oklab, var(--ink) 12%, transparent)' }}>
         <div className="h-full" style={{ width: `${pct}%`, background: 'var(--accent)' }} />
       </div>
       <div className="mt-3 flex items-center gap-2">
-        <button onClick={() => setSessions(Math.max(0, sessions - 1))} className="h-9 w-9 rounded-lg border" style={{ borderColor: 'color-mix(in oklab, var(--ink) 15%, transparent)' }}>−</button>
-        <button onClick={() => setSessions(Math.min(target, sessions + 1))} className="h-9 w-9 rounded-lg border" style={{ borderColor: 'color-mix(in oklab, var(--ink) 15%, transparent)' }}>+</button>
+        <button onClick={() => setSessions(Math.max(0, sessions - 1))} className="h-9 w-9 rounded-lg border" style={{ borderColor: 'color-mix(in oklab, var(--ink) 15%, transparent)' }}>
+          −
+        </button>
+        <button onClick={() => setSessions(Math.min(target, sessions + 1))} className="h-9 w-9 rounded-lg border" style={{ borderColor: 'color-mix(in oklab, var(--ink) 15%, transparent)' }}>
+          +
+        </button>
       </div>
       <div className="mt-2 text-xs opacity-70">Hedefe {Math.max(0, target - sessions)} seans kaldı.</div>
     </div>

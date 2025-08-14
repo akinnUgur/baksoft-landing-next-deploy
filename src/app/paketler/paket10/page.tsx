@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Image from 'next/image';
 
 /* =========================================================
    TYPES
@@ -21,7 +22,7 @@ type Service = {
   max: number;
   durationMin: number;
   desc: string;
-  image?: string; // optional remote, fallback handled
+  image?: string; // optional
   tag?: 'Popüler' | 'Yeni' | 'Kampanya';
 };
 
@@ -34,9 +35,7 @@ type Doctor = {
   languages: string[];
   insurances: string[];
   bio: string;
-  // weekly schedule: 1=Pzt..7=Paz -> available slots (HH:MM)
   schedule: Partial<Record<1 | 2 | 3 | 4 | 5 | 6 | 7, string[]>>;
-  // avatar optional (we show initials if missing)
   avatar?: string;
 };
 
@@ -64,8 +63,7 @@ const SERVICES: Service[] = [
     durationMin: 30,
     desc:
       'Ultrasonik scaler ile tartar temizliği ve cilalama. 6 ayda bir önerilir.',
-    image:
-      'https://images.pexels.com/photos/3779705/pexels-photo-3779705.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/clinic/clinic-1.webp',
     tag: 'Popüler',
   },
   {
@@ -77,8 +75,7 @@ const SERVICES: Service[] = [
     durationMin: 60,
     desc:
       'Heim ışık destekli tek seansta beyazlatma. Duyarlılık için koruyucu jel uygulanır.',
-    image:
-      'https://images.pexels.com/photos/6627472/pexels-photo-6627472.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/clinic/clinic-2.webp',
     tag: 'Kampanya',
   },
   {
@@ -90,8 +87,7 @@ const SERVICES: Service[] = [
     durationMin: 90,
     desc:
       'Lokal anestezi ile enfekte pulpanın çıkarılıp kanalın doldurulması. Mikroskop destekli.',
-    image:
-      'https://images.pexels.com/photos/5355699/pexels-photo-5355699.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/clinic/clinic-3.webp',
   },
   {
     id: 'srv-veneer',
@@ -102,8 +98,7 @@ const SERVICES: Service[] = [
     durationMin: 120,
     desc:
       'Mine dostu minimal aşındırma ile ön bölge estetik lamine porselen uygulaması.',
-    image:
-      'https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/clinic/clinic-4.webp',
     tag: 'Yeni',
   },
   {
@@ -115,8 +110,7 @@ const SERVICES: Service[] = [
     durationMin: 120,
     desc:
       'Titanyum implant yerleştirme. Gerekirse kemik grefti ve geçici kron opsiyonlu.',
-    image:
-      'https://images.pexels.com/photos/5355697/pexels-photo-5355697.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/clinic/clinic-5.webp',
   },
   {
     id: 'srv-ortho',
@@ -127,8 +121,7 @@ const SERVICES: Service[] = [
     durationMin: 30,
     desc:
       'Diş dizilimi ve kapanış analizi. Şeffaf plak veya braket için başlangıç değerlendirmesi.',
-    image:
-      'https://images.pexels.com/photos/5355641/pexels-photo-5355641.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/clinic/clinic-1.webp',
   },
 ];
 
@@ -265,10 +258,8 @@ export default function Paket15Clinic() {
 
   return (
     <main
-  className="min-h-[100dvh] w-full overflow-x-hidden text-slate-900 bg-gradient-to-b from-white via-sky-50/40 to-white"
->
-  
-
+      className="min-h-[100dvh] w-full overflow-x-hidden text-slate-900 bg-gradient-to-b from-white via-sky-50/40 to-white"
+    >
       {/* Top strip */}
       <div className="bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500 text-white text-sm">
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
@@ -279,50 +270,56 @@ export default function Paket15Clinic() {
 
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-slate-200/60 bg-white/80 backdrop-blur">
-  <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
-    {/* Logo + Marka */}
-    <a
-      href="/paketler"
-      className="flex items-center gap-2"
-    >
-      <img
-        src="/baksoftLogo.png"
-        alt="Baksoft Logo"
-        className="h-8 w-8 object-contain"
-      />
-      <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
-    </a>
+        <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
+          {/* Logo + Marka */}
+          <a
+            href="/paketler"
+            className="flex items-center gap-2"
+          >
+            <Image
+              src="/baksoftLogo.png"
+              alt="Baksoft Logo"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
+            <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
+          </a>
 
-    {/* Menü */}
-    <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-600">
-      <a href="#booking" className="hover:text-slate-900">Randevu</a>
-      <a href="#services" className="hover:text-slate-900">Hizmetler</a>
-      <a href="#doctors" className="hover:text-slate-900">Doktorlar</a>
-      <a href="#gallery" className="hover:text-slate-900">Önce/Sonra</a>
-      <a href="#faq" className="hover:text-slate-900">SSS</a>
-    </nav>
+          {/* Menü */}
+          <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-600">
+            <a href="#booking" className="hover:text-slate-900">Randevu</a>
+            <a href="#services" className="hover:text-slate-900">Hizmetler</a>
+            <a href="#doctors" className="hover:text-slate-900">Doktorlar</a>
+            <a href="#gallery" className="hover:text-slate-900">Önce/Sonra</a>
+            <a href="#faq" className="hover:text-slate-900">SSS</a>
+          </nav>
 
-    {/* Sağ buton */}
-    <a
-      href="#booking"
-      className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-teal-500 text-white font-semibold hover:bg-teal-400 transition"
-    >
-      Randevu Al
-    </a>
-  </div>
-</header>
-
+          {/* Sağ buton */}
+          <a
+            href="#booking"
+            className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-teal-500 text-white font-semibold hover:bg-teal-400 transition"
+          >
+            Randevu Al
+          </a>
+        </div>
+      </header>
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <ImgSafe
-          src="https://images.pexels.com/photos/3881441/pexels-photo-3881441.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          alt="Klinik ortamı"
-          className="absolute inset-0 w-full h-full object-cover opacity-25"
-          fallbackClass="absolute inset-0 bg-[radial-gradient(60%_50%_at_20%_0%,rgba(20,184,166,0.2),transparent),radial-gradient(40%_30%_at_100%_0%,rgba(6,182,212,0.18),transparent)]"
-        />
+        {/* background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.pexels.com/photos/3881441/pexels-photo-3881441.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            alt="Klinik ortamı"
+            fill
+            sizes="100vw"
+            className="object-cover opacity-25"
+            priority
+          />
+        </div>
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/40 via-sky-50/50 to-white" />
-        <div className="mx-auto max-w-7xl px-4 py-14 md:py-22 grid md:grid-cols-12 gap-10 items-center">
+        <div className="mx-auto max-w-7xl px-4 py-14 md:py-22 grid md:grid-cols-12 gap-10 items-center relative">
           <div className="md:col-span-6">
             <span className="inline-block text-[11px] uppercase tracking-widest text-teal-700 bg-white/70 border border-slate-200 px-2 py-1 rounded">
               Dijital Planlama · Tecrübeli Doktorlar
@@ -519,11 +516,15 @@ export default function Paket15Clinic() {
               className="group rounded-2xl border border-slate-200 bg-white overflow-hidden"
             >
               <div className="relative">
-                <ImgSafe
-                  src={s.image}
-                  alt={s.name}
-                  className="aspect-[16/9] w-full object-cover group-hover:scale-[1.02] transition"
-                />
+                <div className="relative w-full aspect-[16/9]">
+                  <Image
+                    src={s.image || '/clinic/clinic-1.webp'}
+                    alt={s.name}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover transition group-hover:scale-[1.02]"
+                  />
+                </div>
                 {s.tag && (
                   <span
                     className={
@@ -703,18 +704,22 @@ export default function Paket15Clinic() {
                 },
                 {
                   before:
-                    'https://images.pexels.com/photos/5355699/pexels-photo-5355699.jpeg?auto=compress&cs=tinysrgb&w=800',
+                    'https://images.pexels.com/photos/5355697/pexels-photo-5355697.jpeg?auto=compress&cs=tinysrgb&w=800',
                   after:
                     'https://images.pexels.com/photos/5355697/pexels-photo-5355697.jpeg?auto=compress&cs=tinysrgb&w=800',
                 },
               ].map((g, idx) => (
                 <div key={idx} className="rounded-xl overflow-hidden border border-slate-200">
                   <div className="relative">
-                    <ImgSafe src={g.before} alt="Önce" className="aspect-[4/3] w-full object-cover" />
+                    <div className="relative w-full aspect-[4/3]">
+                      <Image src={g.before} alt="Önce" fill sizes="50vw" className="object-cover" />
+                    </div>
                     <span className="absolute left-2 top-2 text-[11px] px-2 py-1 rounded-full bg-slate-900/80 text-white">Önce</span>
                   </div>
                   <div className="relative">
-                    <ImgSafe src={g.after} alt="Sonra" className="aspect-[4/3] w-full object-cover" />
+                    <div className="relative w-full aspect-[4/3]">
+                      <Image src={g.after} alt="Sonra" fill sizes="50vw" className="object-cover" />
+                    </div>
                     <span className="absolute left-2 top-2 text-[11px] px-2 py-1 rounded-full bg-emerald-600 text-white">Sonra</span>
                   </div>
                 </div>
@@ -764,7 +769,7 @@ export default function Paket15Clinic() {
           </div>
         </div>
         <div className="mx-auto max-w-7xl px-4 h-12 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
-          <span>© {new Date().getFullYear()} Baksoft · Nova Klinik</span>
+          <span>© {new Date().getFullYear()} Baksoft · Özelleştirilebilir Tasarım No:10</span>
           <a href="#booking" className="underline underline-offset-4">Randevu</a>
         </div>
       </footer>
@@ -827,42 +832,6 @@ function Stars({ value }: { value: number }) {
   );
 }
 
-/* ---- Safe image with graceful fallback ---- */
-function ImgSafe({
-  src,
-  alt,
-  className,
-  fallbackClass,
-}: {
-  src?: string;
-  alt: string;
-  className?: string;
-  fallbackClass?: string;
-}) {
-  const [ok, setOk] = useState(true);
-  if (!src || !ok) {
-    return (
-      <div
-        className={
-          fallbackClass ||
-          'bg-[radial-gradient(60%_40%_at_20%_0%,rgba(20,184,166,0.12),transparent),radial-gradient(50%_35%_at_100%_0%,rgba(6,182,212,0.12),transparent)]'
-        }
-      >
-        <div className={className} aria-label={alt} />
-      </div>
-    );
-  }
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt={alt}
-      className={className}
-      onError={() => setOk(false)}
-    />
-  );
-}
-
 /* ---- Avatar with initials ---- */
 function Avatar({ name, src }: { name: string; src?: string }) {
   const initials = name
@@ -872,15 +841,18 @@ function Avatar({ name, src }: { name: string; src?: string }) {
     .map((s) => s[0])
     .join('')
     .toUpperCase();
-  return src ? (
-    <ImgSafe
-      src={src}
-      alt={name}
-      className="h-14 w-14 rounded-xl object-cover"
-    />
-  ) : (
-    <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 text-white grid place-items-center font-semibold">
-      {initials}
+
+  if (!src) {
+    return (
+      <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 text-white grid place-items-center font-semibold">
+        {initials}
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative h-14 w-14 rounded-xl overflow-hidden">
+      <Image src={src} alt={name} fill sizes="56px" className="object-cover" />
     </div>
   );
 }
@@ -947,11 +919,15 @@ function ServiceDrawer({
           ) : (
             <>
               <div className="rounded-xl border border-slate-200 overflow-hidden bg-white">
-                <ImgSafe
-                  src={service.image}
-                  alt={service.name}
-                  className="w-full aspect-[16/9] object-cover"
-                />
+                <div className="relative w-full aspect-[16/9]">
+                  <Image
+                    src={service.image || '/clinic/clinic-1.webp'}
+                    alt={service.name}
+                    fill
+                    sizes="(max-width: 520px) 100vw, 520px"
+                    className="object-cover"
+                  />
+                </div>
                 <div className="p-4">
                   <div className="text-sm text-slate-500">{service.dept}</div>
                   <h3 className="text-lg font-semibold">{service.name}</h3>

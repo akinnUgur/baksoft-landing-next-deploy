@@ -20,7 +20,7 @@ export const PACKAGES: PackageItem[] = [
 /* ========================= CAROUSEL ========================= */
 export const CAROUSEL_ITEMS: CarouselItem[] = [
   { slug: "/paketler/paket1",  title: "Baksoft Paket 1",  subtitle: "Portföy / Proje", vibe: "Editorial",
-    cover: "https://images.pexels.com/photos/7031417/pexels-photo-7031417.jpeg?auto=compress&cs=tinysrgb&w=1600", // ALT: /images/paketler/paket1/cover.jpg
+    cover: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1600", // ALT: /images/paketler/paket1/cover.jpg
     chips: ["landing","pages_4_10","gallery"] },
 
   { slug: "/paketler/paket2",  title: "Baksoft Paket 2",  subtitle: "Restoran", vibe: "Premium",

@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-
+import Image from "next/image";
 /** --- Types --- */
 type Category = 'Sneakers' | 'Giyim' | 'Aksesuar';
 type Brand = 'Nova' | 'Aero' | 'Cloud' | 'Urban' | 'Daily';
@@ -26,8 +26,7 @@ const PRODUCTS: Product[] = [
   {
     id: 101,
     name: 'Aero Runner V2',
-    image:
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1400&auto=format&fit=crop',
+    image: '/car/car-3.webp',
     brand: 'Aero',
     category: 'Sneakers',
     price: 2999,
@@ -41,8 +40,7 @@ const PRODUCTS: Product[] = [
   {
     id: 102,
     name: 'Urban Walk Low',
-    image:
-      'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1400&auto=format&fit=crop',
+    image: '/clinic/clinic-4.webp',
     brand: 'Urban',
     category: 'Sneakers',
     price: 2199,
@@ -55,8 +53,7 @@ const PRODUCTS: Product[] = [
   {
     id: 103,
     name: 'Cloud Knit Hoodie',
-    image:
-      'https://images.unsplash.com/photo-1520975938310-044df2290eda?q=80&w=1400&auto=format&fit=crop',
+    image: '/yemek/yemek-2.webp',
     brand: 'Cloud',
     category: 'Giyim',
     price: 1499,
@@ -68,8 +65,7 @@ const PRODUCTS: Product[] = [
   {
     id: 104,
     name: 'Merino Basic Tee',
-    image:
-      'https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1400&auto=format&fit=crop',
+    image: '/hotel/hotel-5.webp',
     brand: 'Nova',
     category: 'Giyim',
     price: 649,
@@ -79,8 +75,7 @@ const PRODUCTS: Product[] = [
   {
     id: 105,
     name: 'Everyday Tote',
-    image:
-      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1400&auto=format&fit=crop',
+    image: '/kahve/kahve-1.webp',
     brand: 'Daily',
     category: 'Aksesuar',
     price: 1199,
@@ -91,8 +86,7 @@ const PRODUCTS: Product[] = [
   {
     id: 106,
     name: 'Thermo Bottle 750ml',
-    image:
-      'https://images.unsplash.com/photo-1542736667-069246bdbc74?q=80&w=1400&auto=format&fit=crop',
+    image: '/mimarlik/mimarlik-2.webp',
     brand: 'Daily',
     category: 'Aksesuar',
     price: 399,
@@ -103,8 +97,7 @@ const PRODUCTS: Product[] = [
   {
     id: 107,
     name: 'Trail Runner Pro',
-    image:
-      'https://images.unsplash.com/photo-1528701800489-20be3c6e61a7?q=80&w=1400&auto=format&fit=crop',
+    image: '/car/car-1.webp',
     brand: 'Aero',
     category: 'Sneakers',
     price: 3390,
@@ -116,8 +109,7 @@ const PRODUCTS: Product[] = [
   {
     id: 108,
     name: 'Packable Wind Jacket',
-    image:
-      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1400&auto=format&fit=crop',
+    image: '/yemek/yemek-4.webp',
     brand: 'Cloud',
     category: 'Giyim',
     price: 2190,
@@ -125,6 +117,7 @@ const PRODUCTS: Product[] = [
     reviews: 41,
   },
 ];
+
 
 /** --- Helpers --- */
 const formatPrice = (n: number) =>
@@ -209,10 +202,12 @@ export default function Paket12TrendyEcom() {
       href="/paketler"
       className="flex items-center gap-2"
     >
-      <img
+      <Image
         src="/baksoftLogo.png"
         alt="Baksoft Logo"
-        className="h-8 w-8 object-contain"
+        width={32}
+        height={32}
+        className="object-contain"
       />
       <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
     </a>
@@ -428,9 +423,11 @@ function ProductCard({
   return (
     <article className="group overflow-hidden rounded-2xl border border-neutral-300 bg-white">
       <div className="relative">
-        <img
+        <Image
           src={p.image}
           alt={p.name}
+          width={400}
+          height={500}
           className="aspect-[4/5] w-full object-cover group-hover:scale-[1.02] transition"
         />
 
@@ -578,7 +575,7 @@ function CartDrawer({
           const p = PRODUCTS.find((x) => x.id === id)!;
           return (
             <div key={idx} className="flex items-center gap-3 rounded-xl border border-neutral-300 p-3 bg-white">
-              <img src={p.image} alt={p.name} className="h-16 w-16 rounded-lg object-cover" />
+              <Image src={p.image} alt={p.name} width={64} height={64} className="rounded-lg object-cover" />
               <div className="flex-1">
                 <div className="text-sm font-semibold text-neutral-900 line-clamp-2">{p.name}</div>
                 <div className="text-xs text-neutral-700">{p.brand}</div>

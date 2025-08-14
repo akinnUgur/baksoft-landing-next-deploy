@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-
+import Image from "next/image";
 /* =========================================================
    Types
 ========================================================= */
@@ -53,8 +53,7 @@ const CARS: Car[] = [
     id: 'c-01',
     brand: 'BMW',
     model: '5 Series',
-    image:
-      'https://images.unsplash.com/photo-1517940310602-8759f5562a66?q=80&w=1600&auto=format&fit=crop',
+    image: '/car/car-1.webp',
     segment: 'Luxury',
     transmission: 'Automatic',
     fuel: 'Hybrid',
@@ -73,8 +72,7 @@ const CARS: Car[] = [
     id: 'c-02',
     brand: 'Mercedes',
     model: 'GLC',
-    image:
-      'https://images.unsplash.com/photo-1619767886558-efdc259cde1b?q=80&w=1600&auto=format&fit=crop',
+    image: '/car/car-2.webp',
     segment: 'Premium',
     transmission: 'Automatic',
     fuel: 'Diesel',
@@ -92,8 +90,7 @@ const CARS: Car[] = [
     id: 'c-03',
     brand: 'Tesla',
     model: 'Model 3',
-    image:
-      'https://images.unsplash.com/photo-1511396275271-80b1b5a99744?q=80&w=1600&auto=format&fit=crop',
+    image: '/car/car-3.webp',
     segment: 'Premium',
     transmission: 'Automatic',
     fuel: 'Electric',
@@ -111,8 +108,7 @@ const CARS: Car[] = [
     id: 'c-04',
     brand: 'Volkswagen',
     model: 'T-Roc',
-    image:
-      'https://images.unsplash.com/photo-1627910082652-3d7bb5bd9dae?q=80&w=1600&auto=format&fit=crop',
+    image: '/car/car-4.webp',
     segment: 'SUV',
     transmission: 'Automatic',
     fuel: 'Petrol',
@@ -130,8 +126,7 @@ const CARS: Car[] = [
     id: 'c-05',
     brand: 'Renault',
     model: 'Clio',
-    image:
-      'https://images.unsplash.com/photo-1625388100636-8a7df6bbd6fb?q=80&w=1600&auto=format&fit=crop',
+    image: '/car/car-5.webp',
     segment: 'Economy',
     transmission: 'Manual',
     fuel: 'Petrol',
@@ -148,8 +143,7 @@ const CARS: Car[] = [
     id: 'c-06',
     brand: 'Toyota',
     model: 'Corolla',
-    image:
-      'https://images.unsplash.com/photo-1619767886558-efdc259cde1b?q=80&w=1600&auto=format&fit=crop&crop=entropy',
+    image: '/car/car-1.webp',
     segment: 'Compact',
     transmission: 'Automatic',
     fuel: 'Hybrid',
@@ -167,8 +161,7 @@ const CARS: Car[] = [
     id: 'c-07',
     brand: 'Ford',
     model: 'Transit Custom',
-    image:
-      'https://images.unsplash.com/photo-1563865436871-2b5b4b0c54c3?q=80&w=1600&auto=format&fit=crop',
+    image: '/car/car-2.webp',
     segment: 'Van',
     transmission: 'Manual',
     fuel: 'Diesel',
@@ -182,6 +175,7 @@ const CARS: Car[] = [
     pricePerDay: 1890,
   },
 ];
+
 
 /* Extras pricing (TL). Per-day unless "fixed" noted */
 const EXTRAS_PRICING: Record<
@@ -366,54 +360,59 @@ export default function Paket14RentACar() {
 
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/75 backdrop-blur">
-  <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
-    {/* Logo + Marka */}
-    <a
-      href="/paketler"
-      className="flex items-center gap-3"
-    >
-      <img
-        src="/baksoftLogo.png"
-        alt="Baksoft Logo"
-        className="h-8 w-8 object-contain"
-      />
-      <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
-    </a>
+        <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
+          {/* Logo + Marka */}
+          <a
+            href="/paketler"
+            className="flex items-center gap-3"
+          >
+            <Image
+              src="/baksoftLogo.png"
+              alt="Baksoft Logo"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
+            <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
+          </a>
 
-    {/* Menü */}
-    <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
-      <a href="#search" className="hover:text-white">Rezervasyon</a>
-      <a href="#cars" className="hover:text-white">Araçlar</a>
-      <a href="#extras" className="hover:text-white">Ekstralar</a>
-      <a href="#faq" className="hover:text-white">SSS</a>
-    </nav>
+          {/* Menü */}
+          <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
+            <a href="#search" className="hover:text-white">Rezervasyon</a>
+            <a href="#cars" className="hover:text-white">Araçlar</a>
+            <a href="#extras" className="hover:text-white">Ekstralar</a>
+            <a href="#faq" className="hover:text-white">SSS</a>
+          </nav>
 
-    {/* Karşılaştır butonu */}
-    <button
-      onClick={() => setCompareOpen(true)}
-      className="ml-auto rounded-xl px-3 h-10 grid place-items-center border border-white/15 text-sm hover:bg-white/5"
-    >
-      Karşılaştır ({compare.length})
-    </button>
+          {/* Karşılaştır butonu */}
+          <button
+            onClick={() => setCompareOpen(true)}
+            className="ml-auto rounded-xl px-3 h-10 grid place-items-center border border-white/15 text-sm hover:bg-white/5"
+          >
+            Karşılaştır ({compare.length})
+          </button>
 
-    {/* Sağ buton */}
-    <a
-      href="#search"
-      className="ml-2 rounded-xl px-4 h-10 grid place-items-center bg-amber-400 text-slate-900 font-semibold hover:bg-amber-300 transition"
-    >
-      Fiyatları Gör
-    </a>
-  </div>
-</header>
+          {/* Sağ buton */}
+          <a
+            href="#search"
+            className="ml-2 rounded-xl px-4 h-10 grid place-items-center bg-amber-400 text-slate-900 font-semibold hover:bg-amber-300 transition"
+          >
+            Fiyatları Gör
+          </a>
+        </div>
+      </header>
 
 
       {/* Hero + Search */}
       <section className="relative overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1600&auto=format&fit=crop"
-          alt="Luxury car"
-          className="absolute inset-0 w-full h-full object-cover opacity-25"
-        />
+        <Image
+  src="/car/car-4.webp"
+  alt="Luxury car"
+  width={1024}
+  height={1024}
+  className="absolute inset-0 w-full h-full object-cover opacity-25"
+/>
+
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_15%_10%,rgba(245,158,11,0.22),transparent),radial-gradient(50%_40%_at_100%_0%,rgba(251,191,36,0.18),transparent)]" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-900/30 via-slate-950 to-slate-950" />
 
@@ -614,8 +613,10 @@ export default function Paket14RentACar() {
               key={t}
               active={tag === t}
               onClick={() => setTag(t)}
-              children={t === 'All' ? 'Tümü' : t}
-            />
+            >
+              {t === 'All' ? 'Tümü' : t}
+            </Pill>
+
           ))}
           <div className="ml-auto flex items-center gap-2 text-sm">
             <span className="text-slate-400 hidden sm:block">Hızlı Filtre</span>
@@ -709,9 +710,11 @@ export default function Paket14RentACar() {
                 className="group rounded-2xl border border-white/10 bg-white/5 overflow-hidden"
               >
                 <div className="relative">
-                  <img
+                  <Image
                     src={c.image}
                     alt={`${c.brand} ${c.model}`}
+                    width={600}
+                    height={400}
                     className="aspect-[16/9] w-full object-cover group-hover:scale-[1.02] transition"
                   />
                   {c.instant && (
@@ -1036,7 +1039,7 @@ function CompareDrawer({
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {list.map((c) => (
                 <div key={c.id} className="rounded-xl border border-white/10 bg-white/5 p-4">
-                  <img
+                  <Image
                     src={c.image}
                     alt={`${c.brand} ${c.model}`}
                     className="h-32 w-full object-cover rounded-lg"
@@ -1121,7 +1124,7 @@ function ExtrasDrawer({
           ) : (
             <>
               <div className="rounded-xl border border-white/10 p-4 flex items-center gap-3">
-                <img src={car.image} alt={car.model} className="h-14 w-20 object-cover rounded-lg" />
+                <Image src={car.image} alt={car.model} width={80} height={56} className="object-cover rounded-lg" />
                 <div className="text-sm">
                   <div className="font-semibold">
                     {car.brand} {car.model}
@@ -1334,10 +1337,12 @@ function BookingDrawer({
               {/* summary */}
               <div className="rounded-xl border border-white/10 p-4">
                 <div className="flex items-center gap-3">
-                  <img
+                  <Image
                     src={car.image}
                     alt={car.model}
-                    className="h-16 w-24 object-cover rounded-lg"
+                    width={96}
+                    height={64}
+                    className="object-cover rounded-lg"
                   />
                   <div className="text-sm">
                     <div className="font-semibold">
@@ -1401,7 +1406,7 @@ function BookingDrawer({
                     .filter(([key]) => {
                       const k = key as ExtraKey;
                       if (k === 'childSeat') return extras.childSeat > 0;
-                      // @ts-ignore
+                      
                       return !!extras[k];
                     })
                     .map(([key, v]) => (

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import ImgSafe from './ImgSafe';
-
+import Image from 'next/image';
 type Mode = 'landing' | 'corporate' | 'commerce' | 'b2c';
 
 export default function HeroPrime() {
@@ -134,13 +134,18 @@ export default function HeroPrime() {
               </div>
 
               {/* Web görsel */}
-              <div className="relative">
-                <ImgSafe
-                  src="/onizleme-web.webp"
-                  alt="Önizleme Web"
-                  className="w-full h-full object-contain animate-hero-fade bg-black"
-                />
-              </div>
+              {/* Web görsel (TEST) */}
+<div className="relative bg-black rounded-[24px] overflow-hidden">
+  <Image
+    src="/onizleme-web.webp"     // /public/onizleme-web.webp olmalı
+    alt="Önizleme Web"
+    width={1600}
+    height={900}
+    className="w-full h-auto object-contain"
+    priority
+  />
+</div>
+
             </div>
 
             {/* Mobil görsel */}
@@ -153,6 +158,7 @@ export default function HeroPrime() {
                 src="/onizleme-mobil.webp"
                 alt="Önizleme Mobil"
                 className="w-full h-52 object-cover object-top bg-black"
+                unoptimized // ⬅ geçici çözüm
               />
             </div>
           </div>
@@ -184,9 +190,3 @@ function modeLabel(m: Mode) {
   return 'B2C / Özel Proje';
 }
 
-function modeChips(m: Mode) {
-  if (m === 'landing') return ['Hero + CTA', 'Özellik blokları', 'Referans', 'Form'];
-  if (m === 'corporate') return ['Hakkında', 'Hizmetler', 'Blog/SSS', 'İletişim'];
-  if (m === 'commerce') return ['Katalog', 'Sepet/Ödeme', 'Filtre/Arama', 'Analitik'];
-  return ['Keşif', 'UX Akışları', 'Entegrasyonlar', 'Sprint'];
-}

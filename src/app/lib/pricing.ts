@@ -1,4 +1,5 @@
-import type { EstimatorConfig, TierId } from '@/lib/types';
+import { EstimatorConfig, TierId } from "./types";
+
 
 export function recommendTier(c: EstimatorConfig): TierId {
   if (c.commerce) return 'commerce';

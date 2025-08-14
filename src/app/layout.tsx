@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import ClientShell from "./ClientShell";
+import { Suspense } from "react"; // ✅ EKLENDİ
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -45,7 +46,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {/* Navbar/Footer göster/gizle mantığı ClientShell içinde */}
-          <ClientShell>{children}</ClientShell>
+          <Suspense fallback={<div className="p-4">Yükleniyor…</div>}>
+            <ClientShell>{children}</ClientShell>
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>

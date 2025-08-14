@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Image from "next/image";
 
 /* =========================
    Types & Demo Data
@@ -19,6 +20,16 @@ type MenuItem = {
   popular?: boolean;
 };
 
+/* =========================
+   Local Image Pool
+   /public/yemek/yemek-1 ... /public/yemek/yemek-10
+========================= */
+const YEMEK_IMG = Array.from({ length: 10 }, (_, i) => `/yemek/yemek-${i + 1}.webp`);
+const pick = (i: number) => YEMEK_IMG[i % YEMEK_IMG.length];
+
+/* =========================
+   MENU (images → local pool)
+========================= */
 const MENU: MenuItem[] = [
   {
     id: 'm1',
@@ -27,7 +38,7 @@ const MENU: MenuItem[] = [
     price: 320,
     course: 'Kahvaltı',
     tags: ['Vejetaryen', 'Glutensiz', 'Şef Önerisi'],
-    image: 'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop',
+    image: pick(0),
     popular: true,
   },
   {
@@ -37,7 +48,7 @@ const MENU: MenuItem[] = [
     price: 560,
     course: 'Akşam',
     tags: ['Glutensiz', 'Şef Önerisi'],
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600&auto=format&fit=crop',
+    image: pick(1),
   },
   {
     id: 'm3',
@@ -46,7 +57,7 @@ const MENU: MenuItem[] = [
     price: 290,
     course: 'Öğle',
     tags: ['Vegan', 'Glutensiz'],
-    image: 'https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1600&auto=format&fit=crop',
+    image: pick(2),
   },
   {
     id: 'm4',
@@ -55,7 +66,7 @@ const MENU: MenuItem[] = [
     price: 210,
     course: 'Tatlı',
     tags: ['Vejetaryen'],
-    image: 'https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?q=80&w=1600&auto=format&fit=crop',
+    image: pick(3),
     popular: true,
   },
   {
@@ -65,7 +76,7 @@ const MENU: MenuItem[] = [
     price: 340,
     course: 'Öğle',
     tags: ['Acılı', 'Şef Önerisi'],
-    image: 'https://images.unsplash.com/photo-1551503766-ac63dfa6401f?q=80&w=1600&auto=format&fit=crop',
+    image: pick(4),
   },
   {
     id: 'm6',
@@ -74,7 +85,7 @@ const MENU: MenuItem[] = [
     price: 140,
     course: 'İçecek',
     tags: ['Vegan', 'Glutensiz'],
-    image: 'https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1600&auto=format&fit=crop',
+    image: pick(5),
   },
   {
     id: 'm7',
@@ -83,7 +94,7 @@ const MENU: MenuItem[] = [
     price: 620,
     course: 'Akşam',
     tags: ['Glutensiz', 'Şef Önerisi'],
-    image: 'https://images.unsplash.com/photo-1544025162-8a9132f0b4a9?q=80&w=1600&auto=format&fit=crop',
+    image: pick(6),
   },
   {
     id: 'm8',
@@ -92,9 +103,30 @@ const MENU: MenuItem[] = [
     price: 230,
     course: 'Tatlı',
     tags: ['Vejetaryen'],
-    image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476e?q=80&w=1600&auto=format&fit=crop',
+    image: pick(7),
   },
 ];
+
+/* =========================
+   next/image helper (fill)
+========================= */
+function ImgFill({
+  src,
+  alt,
+  className,
+  sizes = "100vw",
+}: {
+  src: string;
+  alt: string;
+  className?: string; // wrapper class (w-*, h-* / aspect-*)
+  sizes?: string;
+}) {
+  return (
+    <div className={`relative ${className || ""}`}>
+      <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
+    </div>
+  );
+}
 
 /* =========================
    Page
@@ -119,6 +151,9 @@ export default function Paket17Bistro() {
     return arr;
   }, [activeCourse, tag, query]);
 
+  // Hero görseli de local havuzdan
+  const heroImg = pick(9);
+
   return (
     <main className="min-h-[100dvh] bg-[#fbf7f2] text-stone-900 selection:bg-amber-200/60">
       {/* SOL RAY - Marka Şeridi */}
@@ -127,47 +162,50 @@ export default function Paket17Bistro() {
         <div className="-rotate-90 tracking-[0.3em] text-xs text-stone-600">BISTRO · ANTALYA</div>
         <div className="w-[2px] h-16 bg-amber-300/60 rounded-full" />
       </aside>
-{/* Top strip */}
+
+      {/* Top strip */}
       <div style={{ background: 'var(--accent)', color: 'var(--bg)' }} className="text-xs">
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
           <span className="tracking-wide opacity-90">Baksoft · Özelleştirilebilir Tasarım No:2 </span>
           <span className="opacity-80">Edition • <b>Concept</b></span>
         </div>
       </div>
+
       {/* HEADER */}
       <header className="lg:ml-20 sticky top-0 z-40 border-b border-amber-200/60 bg-[#fbf7f2]/80 backdrop-blur">
-  <div className="mx-auto max-w-7xl px-5 h-16 flex items-center gap-4">
-    {/* Logo + Marka */}
-    <a
-      href="/paketler"
-      className="font-semibold tracking-wide flex items-center gap-2"
-    >
-      <img
-        src="/baksoftLogo.png"
-        alt="Baksoft Logo"
-        className="h-8 w-8 object-contain"
-      />
-      <span className="text-amber-700">Baksoft Tasarım</span>
-    </a>
+        <div className="mx-auto max-w-7xl px-5 h-16 flex items-center gap-4">
+          {/* Logo + Marka */}
+          <a
+            href="/paketler"
+            className="font-semibold tracking-wide flex items-center gap-2"
+          >
+            <Image
+              src="/baksoftLogo.png"
+              alt="Baksoft Logo"
+              width={32}
+              height={32}
+              className="h-8 w-8 object-contain"
+              priority
+            />
+            <span className="text-amber-700">Baksoft Tasarım</span>
+          </a>
 
-    {/* Menü */}
-    <nav className="hidden md:flex ml-6 gap-6 text-sm text-stone-600">
-      <a href="#menu" className="hover:text-stone-900">Menü</a>
-      <a href="#chef" className="hover:text-stone-900">Şefin Önerileri</a>
-      <a href="#reserve" className="hover:text-stone-900">Rezervasyon</a>
-    </nav>
+          {/* Menü */}
+          <nav className="hidden md:flex ml-6 gap-6 text-sm text-stone-600">
+            <a href="#menu" className="hover:text-stone-900">Menü</a>
+            <a href="#chef" className="hover:text-stone-900">Şefin Önerileri</a>
+            <a href="#reserve" className="hover:text-stone-900">Rezervasyon</a>
+          </nav>
 
-    {/* Sağ buton */}
-    <a
-      href="#reserve"
-      className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-stone-900 text-amber-100 font-medium hover:opacity-90"
-    >
-      Masa Ayırt
-    </a>
-  </div>
-</header>
-
-
+          {/* Sağ buton */}
+          <a
+            href="#reserve"
+            className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-stone-900 text-amber-100 font-medium hover:opacity-90"
+          >
+            Masa Ayırt
+          </a>
+        </div>
+      </header>
 
       {/* HERO – Asimetrik, açık tema + organik dalga */}
       <section className="lg:ml-20 relative">
@@ -207,12 +245,13 @@ export default function Paket17Bistro() {
             </div>
           </div>
 
-          {/* hero görseli - eğik mask */}
+          {/* hero görseli - eğik mask (local pool) */}
           <div className="md:col-span-6 relative">
-            <img
-              src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop"
+            <ImgFill
+              src={heroImg}
               alt="Bistro sofrası"
-              className="w-full h-[360px] object-cover rounded-3xl shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)] [clip-path:polygon(6%_0,100%_0,94%_100%,0_100%)]"
+              className="w-full h-[360px] rounded-3xl shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)] [clip-path:polygon(6%_0,100%_0,94%_100%,0_100%)]"
+              sizes="(min-width: 768px) 600px, 100vw"
             />
             <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl border border-amber-200/70 px-4 py-3 text-sm shadow">
               <div className="font-semibold">Günlük Menü</div>
@@ -252,10 +291,11 @@ export default function Paket17Bistro() {
                 }
               >
                 <div className="relative">
-                  <img
+                  <ImgFill
                     src={m.image}
                     alt={m.title}
-                    className="aspect-[4/3] w-full object-cover transition group-hover:scale-[1.02]"
+                    className="w-full aspect-[4/3] transition group-hover:scale-[1.02]"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   />
                   {m.popular && (
                     <span className="absolute left-3 top-3 text-[11px] px-2 py-1 rounded-full bg-stone-900 text-amber-100 font-semibold">
@@ -300,22 +340,27 @@ export default function Paket17Bistro() {
             <div className="text-sm text-stone-600">Mevsime göre değişir</div>
           </div>
 
-          <div className="mt-6 grid md:grid-cols-2 gap-5">
-            {MENU.filter((m) => m.tags.includes('Şef Önerisi')).map((m) => (
-              <div key={m.id} className="rounded-3xl overflow-hidden border border-amber-200/70 bg-white grid grid-cols-[140px_1fr]">
-                <img src={m.image} alt={m.title} className="h-full w-full object-cover" />
-                <div className="p-4 flex flex-col">
-                  <div className="text-xs text-stone-500">{m.course}</div>
-                  <div className="text-lg font-semibold">{m.title}</div>
-                  <p className="text-sm text-stone-600 line-clamp-2">{m.desc}</p>
-                  <div className="mt-auto flex items-center justify-between">
-                    <div className="text-xl font-extrabold text-stone-900">₺{m.price.toLocaleString('tr-TR')}</div>
-                    <button className="h-10 px-4 rounded-xl bg-stone-900 text-amber-100 font-medium hover:opacity-90">Sipariş (Demo)</button>
-                  </div>
+        <div className="mt-6 grid md:grid-cols-2 gap-5">
+          {MENU.filter((m) => m.tags.includes('Şef Önerisi')).map((m) => (
+            <div key={m.id} className="rounded-3xl overflow-hidden border border-amber-200/70 bg-white grid grid-cols-[140px_1fr]">
+              <ImgFill
+                src={m.image}
+                alt={m.title}
+                className="h-full w-full min-h-[140px]"   // 140px sol kolon
+                sizes="140px"
+              />
+              <div className="p-4 flex flex-col">
+                <div className="text-xs text-stone-500">{m.course}</div>
+                <div className="text-lg font-semibold">{m.title}</div>
+                <p className="text-sm text-stone-600 line-clamp-2">{m.desc}</p>
+                <div className="mt-auto flex items-center justify-between">
+                  <div className="text-xl font-extrabold text-stone-900">₺{m.price.toLocaleString('tr-TR')}</div>
+                  <button className="h-10 px-4 rounded-xl bg-stone-900 text-amber-100 font-medium hover:opacity-90">Sipariş (Demo)</button>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
         </div>
       </section>
 

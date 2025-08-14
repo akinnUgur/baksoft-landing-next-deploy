@@ -1,22 +1,61 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PageTransition } from "@/app/components/common/PageTransition";
 import Hero from "@/app/components/sections/Hero";
 import WhyBaksoft from "@/app/components/homePage/WhyUs";
 import HowWeWork from "@/app/components/homePage/HowWork";
 import PackageCarousel from "@/app/components/PackageCarousel";
+import { CarouselItem } from "../lib/types";
+import { CAROUSEL_ITEMS } from "../lib/data";
+
 
 type CarouselItemLite = { slug: string; title: string };
 
-export default function HomePageClient({ items }: { items: CarouselItemLite[] }) {
+export default function HomePageClient({ items }: { items?: CarouselItemLite[] }) {
+  // /paket → /paketler/paket... dönüştür
+  const normalizeSlug = (s: string) => {
+    if (!s) return s;
+    if (s.startsWith("/paketler/")) return s;
+    if (s.startsWith("/paket")) return `/paketler${s}`;
+    return s;
+  };
+
+  // Full veriyi slug → item map’ine çevir
+  const fullBySlug = useMemo(() => {
+    const m = new Map<string, CarouselItem>();
+    for (const it of CAROUSEL_ITEMS) m.set(it.slug, it);
+    return m;
+  }, []);
+
+  // Eğer parent "lite" item’lar veriyorsa full veriyle eşle; yoksa data.ts’teki default listeyi kullan
+  const normalizedItems = useMemo<CarouselItem[]>(() => {
+    if (!items || items.length === 0) return CAROUSEL_ITEMS;
+
+    return items.map((lite) => {
+      const slug = normalizeSlug(lite.slug);
+      const found = fullBySlug.get(slug);
+      if (found) return found;
+
+      // Fallback: bulunamazsa güvenli varsayılanlar
+      return {
+        slug,
+        title: lite.title,
+        subtitle: "",
+        vibe: "minimal",
+        cover: "/default-icons/mobil.webp",
+        chips: [],
+      } as unknown as CarouselItem;
+    });
+  }, [items, fullBySlug]);
+
   // Önizleme modal
   const [preview, setPreview] = useState<{ slug: string; title: string } | null>(null);
   const [loading, setLoading] = useState(false);
   const [frameFailed, setFrameFailed] = useState(false);
-  const frameTimerRef = useRef<number | null>(null); // istersen kaldırabilirsin
+  const frameTimerRef = useRef<number | null>(null);
 
-  // Modal açıkken body scroll kilidi + ESC ile kapatma
+  // Modal açıkken body scroll kilidi + ESC
   useEffect(() => {
     if (!preview) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setPreview(null);
@@ -28,21 +67,13 @@ export default function HomePageClient({ items }: { items: CarouselItemLite[] })
     };
   }, [preview]);
 
-  // Yeni önizleme: loading başlat + hatayı sıfırla
+  // Yeni önizleme: loading + hata reset
   useEffect(() => {
     if (preview) {
       setLoading(true);
       setFrameFailed(false);
     }
-  }, [preview?.slug]);
-
-  // /paket → /paketler/paket... dönüştür
-  const normalizeSlug = (s: string) => {
-    if (!s) return s;
-    if (s.startsWith("/paketler/")) return s;
-    if (s.startsWith("/paket")) return `/paketler${s}`;
-    return s;
-    };
+  }, [preview]);
 
   return (
     <main
@@ -53,7 +84,7 @@ export default function HomePageClient({ items }: { items: CarouselItemLite[] })
           "radial-gradient(60% 40% at 12% 0%, rgba(99,102,241,0.08), transparent), radial-gradient(40% 30% at 100% 0%, rgba(16,185,129,0.06), transparent), var(--page-bg)",
       }}
     >
-      {/* Deco orbs (global) */}
+      {/* Deco orbs */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
           className="absolute -top-24 -left-16 h-72 w-72 rounded-full blur-3xl opacity-30"
@@ -72,10 +103,8 @@ export default function HomePageClient({ items }: { items: CarouselItemLite[] })
         <section>
           <div>
             <PackageCarousel
-              items={items}
-              onPreview={(it: CarouselItemLite) =>
-                setPreview({ slug: normalizeSlug(it.slug), title: it.title })
-              }
+              items={normalizedItems} // ✅ artık CarouselItem[]
+              onPreview={(it) => setPreview({ slug: it.slug, title: it.title })}
             />
           </div>
         </section>
@@ -171,7 +200,7 @@ export default function HomePageClient({ items }: { items: CarouselItemLite[] })
                 )}
               </div>
 
-              {/* Alt bar (ince gradient çizgi) */}
+              {/* Alt bar */}
               <div
                 aria-hidden
                 className="h-px bg-gradient-to-r from-indigo-500/30 via-emerald-500/30 to-cyan-400/30"

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import {   useState } from 'react';
 import { CarouselItem, PackageItem } from '../lib/types';
 import PackageCarousel from '../components/PackageCarousel';
 import HeroPrime from '../components/HeroPrime';
@@ -10,7 +10,7 @@ import { CAROUSEL_ITEMS, PACKAGES, STORIES } from '../lib/data';
 import PreviewOverlay from '../components/PreviewOverlay';
 
 export default function Page() {
-  const year = useMemo(() => new Date().getFullYear(), []);
+  
   const [preview, setPreview] = useState<PackageItem | null>(null);
   const [previewMeta, setPreviewMeta] = useState<CarouselItem | null>(null);
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+
 import { Code, Smartphone, Settings, Brain, Headphones } from 'lucide-react';
 import { PageTransition } from '@/app/components/common/PageTransition';
 
@@ -19,7 +19,7 @@ const NAV = [
 ];
 
 export default function ServicesPage() {
-  const year = useMemo(() => new Date().getFullYear(), []);
+  
 
   return (
     <main
@@ -30,7 +30,7 @@ export default function ServicesPage() {
           'radial-gradient(60% 40% at 12% 0%, rgba(99,102,241,0.08), transparent), radial-gradient(40% 30% at 100% 0%, rgba(16,185,129,0.06), transparent), var(--page-bg)',
       }}
     >
-      {/* global deco orbs */}
+      
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
           className="absolute -top-24 -left-16 h-72 w-72 rounded-full blur-3xl opacity-30"

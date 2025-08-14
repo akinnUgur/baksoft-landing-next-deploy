@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Image from "next/image";
 
 /* =========================
    Types
@@ -33,7 +34,7 @@ const HOTELS: Hotel[] = [
   {
     id: 'h-01',
     name: 'Akya Resort & Spa',
-    image: 'https://images.unsplash.com/photo-1501117716987-c8e2a3fdaf7f?q=80&w=1600&auto=format&fit=crop',
+    image: '/hotel/hotel-1.webp',
     district: 'Belek',
     stars: 5,
     rating: 4.8,
@@ -48,7 +49,7 @@ const HOTELS: Hotel[] = [
   {
     id: 'h-02',
     name: 'Luna Marina Hotel',
-    image: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=1600&auto=format&fit=crop',
+    image: '/hotel/hotel-2.webp',
     district: 'Lara',
     stars: 5,
     rating: 4.7,
@@ -62,7 +63,7 @@ const HOTELS: Hotel[] = [
   {
     id: 'h-03',
     name: 'Kaleiçi Heritage Boutique',
-    image: 'https://images.unsplash.com/photo-1516783154360-123b3928b37f?q=80&w=1600&auto=format&fit=crop',
+    image: '/hotel/hotel-3.webp',
     district: 'Kaleiçi',
     stars: 4,
     rating: 4.5,
@@ -75,7 +76,7 @@ const HOTELS: Hotel[] = [
   {
     id: 'h-04',
     name: 'Konyaaltı Blue Park',
-    image: 'https://images.unsplash.com/photo-1501117716987-c8e2a3fdaf7f?q=80&w=1600&auto=format&fit=crop&crop=entropy',
+    image: '/hotel/hotel-4.webp',
     district: 'Konyaaltı',
     stars: 4,
     rating: 4.4,
@@ -88,7 +89,7 @@ const HOTELS: Hotel[] = [
   {
     id: 'h-05',
     name: 'Side Sun Garden',
-    image: 'https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1600&auto=format&fit=crop',
+    image: '/hotel/hotel-5.webp',
     district: 'Side',
     stars: 5,
     rating: 4.6,
@@ -102,7 +103,7 @@ const HOTELS: Hotel[] = [
   {
     id: 'h-06',
     name: 'Kemer Pine Suites',
-    image: 'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?q=80&w=1600&auto=format&fit=crop',
+    image: '/hotel/hotel-1.webp',
     district: 'Kemer',
     stars: 3,
     rating: 4.2,
@@ -113,6 +114,7 @@ const HOTELS: Hotel[] = [
     tags: ['Aile Dostu'],
   },
 ];
+
 
 /* =========================
    Helpers
@@ -222,17 +224,19 @@ export default function Paket15AntalyaHotel() {
       <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/75 backdrop-blur">
   <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
     {/* Logo + Marka */}
-    <a
-      href="/paketler"
-      className="flex items-center gap-3"
-    >
-      <img
-        src="/baksoftLogo.png"
-        alt="Baksoft Logo"
-        className="h-8 w-8 object-contain"
-      />
-      <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
-    </a>
+   <a
+  href="/paketler"
+  className="flex items-center gap-3"
+>
+  <Image
+    src="/baksoftLogo.png"
+    alt="Baksoft Logo"
+    width={32} // h-8 = 32px
+    height={32} // w-8 = 32px
+    className="object-contain"
+  />
+  <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
+</a>
 
     {/* Menü */}
     <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
@@ -255,13 +259,16 @@ export default function Paket15AntalyaHotel() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1526481280698-8fcc13fd1b5e?q=80&w=1920&auto=format&fit=crop"
+        <Image
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920&auto=format&fit=crop"
           alt="Antalya sahil"
           className="absolute inset-0 w-full h-full object-cover opacity-30"
+          layout="fill"
+          objectFit="cover"
         />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_45%_at_10%_0%,rgba(94,234,212,0.18),transparent),radial-gradient(50%_35%_at_100%_0%,rgba(103,232,249,0.18),transparent)]" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-900/30 via-slate-950 to-slate-950" />
+  
+  <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_45%_at_10%_0%,rgba(94,234,212,0.18),transparent),radial-gradient(50%_35%_at_100%_0%,rgba(103,232,249,0.18),transparent)]" />
+  <div className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-900/30 via-slate-950 to-slate-950" />
 
         <div className="mx-auto max-w-7xl px-4 py-16 md:py-26 grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7">
@@ -435,9 +442,12 @@ export default function Paket15AntalyaHotel() {
           {filtered.map(h => (
             <article key={h.id} className="group rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
               <div className="relative">
-                <img
+                <Image
                   src={h.image}
                   alt={h.name}
+                  layout="responsive"
+                  width={500}
+                  height={300}
                   className="aspect-[16/9] w-full object-cover group-hover:scale-[1.02] transition"
                 />
                 {h.featured && (
@@ -524,7 +534,7 @@ export default function Paket15AntalyaHotel() {
       {/* Footer */}
       <footer className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-10 text-sm text-slate-400 flex flex-col md:flex-row gap-3 items-center justify-between">
-          <div>© {new Date().getFullYear()} Baksoft · AntalyaStay</div>
+          <div>© {new Date().getFullYear()} Baksoft · Özelleştirilebilir Tasarım No:11</div>
           <div className="flex gap-4">
             <a className="hover:text-white" href="#faq">SSS</a>
             <a className="hover:text-white" href="#">Gizlilik</a>
@@ -543,8 +553,15 @@ export default function Paket15AntalyaHotel() {
               <button onClick={() => setOpen(false)} className="h-9 w-9 rounded-lg border border-white/10">✕</button>
             </div>
             <div className="mt-4 rounded-xl border border-white/10 overflow-hidden">
-              <img src={picked.image} alt={picked.name} className="w-full aspect-[16/9] object-cover" />
-              <div className="p-4">
+  <Image
+    src={picked.image}
+    alt={picked.name}
+    width={1280} // 16/9 oranında genişlik (örnek)
+    height={720} // 16/9 oranında yükseklik (örnek)
+    className="w-full aspect-[16/9] object-cover"
+    unoptimized // remote veya dinamik kaynaklarda optimize hatasını engeller
+  />
+  <div className="p-4">
                 <div className="font-semibold">{picked.name}</div>
                 <div className="text-xs text-slate-400 mt-1 flex items-center gap-2">
                   <span>{picked.district}</span><span>·</span><span>{starsLabel(picked.stars)}</span><span>·</span><span>{picked.board}</span>

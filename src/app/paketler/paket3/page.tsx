@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-
+import Image from "next/image";
 /*
   KAFE TANITIM + MENÜ (Friends / Mackbear vibe)
   - Renk paleti: odunsu kahverengi, koyu yeşil, bordo/kırmızı, amber sıcak ışık
@@ -10,7 +10,7 @@ import { useMemo, useState } from 'react';
   - Menü: "chalkboard" (kara tahta) efekti, kategori sekmeleri + etiket filtreleri
   - "Bugünün Kahvesi" köşesi
   - Yorumlar: not kağıdı / post-it stili
-  - Tüm görsellere altına /public alternatif yol için yorum satırı eklendi
+  - Tüm görseller, /public/kahve/kahve-1..5.webp havuzundan deterministik seçilir
 */
 
 /* =========================
@@ -30,6 +30,13 @@ type Item = {
   popular?: boolean;
 };
 
+/* =========================
+   Local Image Pool (WEBP)
+========================= */
+// /public/kahve/kahve-1.webp ... /public/kahve/kahve-5.webp
+const KAHVE_IMG = Array.from({ length: 5 }, (_, i) => `/kahve/kahve-${i + 1}.webp`);
+const pick = (i: number) => KAHVE_IMG[i % KAHVE_IMG.length];
+
 const MENU: Item[] = [
   {
     id: 'i1',
@@ -38,9 +45,8 @@ const MENU: Item[] = [
     price: 165,
     course: 'Kahveler',
     tags: ['Sıcak', 'Yeni'],
-    image:
-      'https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1600&auto=format&fit=crop',
-    // /public/cafe/menu/cinnamon-latte.webp
+    image: pick(0),
+    popular: true,
   },
   {
     id: 'i2',
@@ -49,9 +55,7 @@ const MENU: Item[] = [
     price: 155,
     course: 'Kahveler',
     tags: ['Soğuk'],
-    image:
-      'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1600&auto=format&fit=crop',
-    // /public/cafe/menu/coldbrew-evergreen.webp
+    image: pick(1),
   },
   {
     id: 'i3',
@@ -60,9 +64,7 @@ const MENU: Item[] = [
     price: 180,
     course: 'Çaylar',
     tags: ['Sıcak', 'Yeni'],
-    image:
-      'https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1600&auto=format&fit=crop',
-    // /public/cafe/menu/matcha-affogato.webp
+    image: pick(2),
   },
   {
     id: 'i4',
@@ -71,9 +73,7 @@ const MENU: Item[] = [
     price: 140,
     course: 'Tatlılar',
     tags: ['Glutensiz'],
-    image:
-      'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=1600&auto=format&fit=crop',
-    // /public/cafe/menu/brownie-gf.webp
+    image: pick(3),
   },
   {
     id: 'i5',
@@ -82,9 +82,7 @@ const MENU: Item[] = [
     price: 95,
     course: 'Atıştırmalık',
     tags: [],
-    image:
-      'https://images.unsplash.com/photo-1541781286675-f9c9ae2126c7?q=80&w=1600&auto=format&fit=crop',
-    // /public/cafe/menu/almond-croissant.webp
+    image: pick(4),
   },
   {
     id: 'i6',
@@ -93,9 +91,7 @@ const MENU: Item[] = [
     price: 120,
     course: 'Tatlılar',
     tags: ['Vegan'],
-    image:
-      'https://images.unsplash.com/photo-1513135065346-a098b3e31895?q=80&w=1600&auto=format&fit=crop',
-    // /public/cafe/menu/vegan-carrot-cake.webp
+    image: pick(5),
   },
 ];
 
@@ -103,9 +99,7 @@ const TODAY_SPECIAL = {
   title: 'Gingerbread Latte',
   desc: 'Zencefil, karanfil ve hafif pekmez; üstünde mini marshmallow.',
   price: 175,
-  image:
-    'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1600&auto=format&fit=crop',
-  // /public/cafe/specials/gingerbread-latte.webp
+  image: pick(3),
 };
 
 const REVIEWS = [
@@ -146,69 +140,80 @@ export default function Paket18CozyCafe() {
     return arr.sort((a, b) => (b.popular ? 1 : 0) - (a.popular ? 1 : 0));
   }, [course, tag, query]);
 
+  // Hero ve dekoratif alanlar için yerel havuz
+  
+  const lightsOverlay = pick(1);
+  const stripTexture = pick(0);
+
   return (
     <main className="min-h-[100dvh] bg-[#15110f] text-amber-100 selection:bg-red-400/30">
       {/* SOL DİKEY BRAND STRIP — ahşap doku + ışık şeridi */}
-      <aside className="fixed left-0 top-0 hidden lg:flex h-screen w-24 flex-col items-center justify-between py-8 bg-[url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center border-r border-amber-900/50">
-        {/* /public/cafe/textures/wood-strip.webp */}
+      <aside
+        className="fixed left-0 top-0 hidden lg:flex h-screen w-24 flex-col items-center justify-between py-8 bg-cover bg-center border-r border-amber-900/50"
+        style={{ backgroundImage: `url(${stripTexture})` }}
+      >
         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-800 to-amber-600 shadow-[0_0_40px_-10px_rgba(234,179,8,0.5)]" />
         <div className="-rotate-90 tracking-[0.35em] text-[11px] text-amber-200/90">
           COZY · CENTRAL · CAFE
         </div>
         <div className="w-[2px] h-16 bg-red-700/70 rounded-full shadow-[0_0_20px_rgba(185,28,28,0.6)]" />
       </aside>
-{/* Top strip */}
+
+      {/* Top strip */}
       <div style={{ background: 'var(--accent)', color: 'var(--bg)' }} className="text-xs">
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
           <span className="tracking-wide opacity-90">Baksoft · Özelleştirilebilir Tasarım No:3 </span>
           <span className="opacity-80">Edition • <b>Concept</b></span>
         </div>
       </div>
+
       {/* HEADER */}
       <header className="lg:ml-24 sticky top-0 z-40 border-b border-amber-900/40 bg-[#15110f]/70 backdrop-blur">
-  <div className="mx-auto max-w-7xl px-5 h-16 flex items-center gap-4">
-    {/* Logo + Marka */}
-    <a
-      href="/paketler"
-      className="font-semibold tracking-wide flex items-center gap-2"
-    >
-      <img
-        src="/baksoftLogo.png"
-        alt="Baksoft Logo"
-        className="h-8 w-8 object-contain"
-      />
-      <span className="text-amber-400">Baksoft Tasarım</span>
-    </a>
+        <div className="mx-auto max-w-7xl px-5 h-16 flex items-center gap-4">
+          {/* Logo + Marka */}
+          <a
+            href="/paketler"
+            className="font-semibold tracking-wide flex items-center gap-2"
+          >
+            <Image
+              src="/baksoftLogo.png"
+              alt="Baksoft Logo"
+              width={32} // h-8 = 32px
+              height={32} // w-8 = 32px
+              className="object-contain"
+            />
+            <span className="text-amber-400">Baksoft Tasarım</span>
+          </a>
 
-    {/* Menü */}
-    <nav className="hidden md:flex ml-6 gap-6 text-sm text-amber-200/80">
-      <a href="#menu" className="hover:text-amber-100">Menü</a>
-      <a href="#special" className="hover:text-amber-100">Bugünün Kahvesi</a>
-      <a href="#reviews" className="hover:text-amber-100">Yorumlar</a>
-      <a href="#reserve" className="hover:text-amber-100">Rezervasyon</a>
-    </nav>
+          {/* Menü */}
+          <nav className="hidden md:flex ml-6 gap-6 text-sm text-amber-200/80">
+            <a href="#menu" className="hover:text-amber-100">Menü</a>
+            <a href="#special" className="hover:text-amber-100">Bugünün Kahvesi</a>
+            <a href="#reviews" className="hover:text-amber-100">Yorumlar</a>
+            <a href="#reserve" className="hover:text-amber-100">Rezervasyon</a>
+          </nav>
 
-    {/* Sağ buton */}
-    <a
-      href="#reserve"
-      className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-red-600 text-amber-50 font-medium hover:bg-red-500"
-    >
-      Masa Ayırt
-    </a>
-  </div>
-</header>
+          {/* Sağ buton */}
+          <a
+            href="#reserve"
+            className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-red-600 text-amber-50 font-medium hover:bg-red-500"
+          >
+            Masa Ayırt
+          </a>
+        </div>
+      </header>
 
-
-      {/* HERO — loş kafe + string lights + Xmas vibe */}
+      {/* HERO — loş kafe + string lights */}
       <section className="lg:ml-24 relative">
         <div className="absolute inset-0 pointer-events-none">
-          {/* string lights bokeh */}
-          <img
-            src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1600&auto=format&fit=crop"
+          {/* string lights / bokeh overlay – local */}
+          <Image
+            src={lightsOverlay}
             alt="Lights overlay"
+           width={128} // h-8 = 32px
+              height={128} // w-8 = 32px
             className="absolute inset-0 w-full h-full object-cover opacity-10"
           />
-          {/* /public/cafe/overlays/string-lights.webp */}
         </div>
 
         <div className="relative mx-auto max-w-7xl px-5 py-10 md:py-16 grid md:grid-cols-12 gap-8 items-center">
@@ -243,21 +248,7 @@ export default function Paket18CozyCafe() {
             </div>
           </div>
 
-          {/* hero görseli — kırmızı/yeşil tonlu kafe */}
-          <div className="md:col-span-6 relative">
-            <img
-              src="https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1600&auto=format&fit=crop"
-              alt="Cozy cafe interior"
-              className="w-full h-[360px] object-cover rounded-3xl shadow-[0_30px_90px_-40px_rgba(0,0,0,0.6)] ring-1 ring-amber-900/40"
-            />
-            {/* /public/cafe/hero/room-cozy.webp */}
-            <img
-              src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1600&auto=format&fit=crop"
-              alt="Hot cup detail"
-              className="absolute -bottom-6 -left-6 w-40 h-40 object-cover rounded-2xl border border-amber-900/40"
-            />
-            {/* /public/cafe/hero/cup-close.webp */}
-          </div>
+          
         </div>
 
         {/* ince ayraç */}
@@ -292,12 +283,13 @@ export default function Paket18CozyCafe() {
                   }
                 >
                   <div className="relative">
-                    <img
+                    <Image
                       src={m.image}
                       alt={m.title}
+                      width={132} // h-8 = 32px
+              height={132} // w-8 = 32px
                       className="aspect-[4/3] w-full object-cover opacity-90 group-hover:opacity-100 transition"
                     />
-                    {/* /public/cafe/menu/<id>.webp */}
                     {m.popular && (
                       <span className="absolute left-3 top-3 text-[11px] px-2 py-1 rounded-full bg-red-600 text-amber-50 font-semibold">
                         Popüler
@@ -343,18 +335,19 @@ export default function Paket18CozyCafe() {
         <div className="mx-auto max-w-7xl px-5 pb-12">
           <div className="rounded-3xl border border-green-900/40 bg-gradient-to-r from-green-950 via-[#1b1714] to-red-950 p-5 md:p-8 grid md:grid-cols-12 gap-6 items-center">
             <div className="md:col-span-5">
-              <img
+              <Image
                 src={TODAY_SPECIAL.image}
+                width={256} // h-8 = 32px
+              height={256} // w-8 = 32px
                 alt={TODAY_SPECIAL.title}
                 className="w-full h-[280px] object-cover rounded-2xl ring-1 ring-amber-900/40"
               />
-              {/* /public/cafe/specials/gingerbread-latte.webp */}
             </div>
             <div className="md:col-span-7">
               <div className="text-amber-200/80 text-xs uppercase tracking-[0.25em]">
                 Bugünün Kahvesi
               </div>
-              <h3 className="mt-2 text-3xl font-semibold">{TODAY_SPECIAL.title}</h3>
+              <h3 className="mt-2 className text-3xl font-semibold">{TODAY_SPECIAL.title}</h3>
               <p className="mt-2 text-amber-200/90">{TODAY_SPECIAL.desc}</p>
               <div className="mt-4 text-2xl font-extrabold">
                 ₺{TODAY_SPECIAL.price.toLocaleString('tr-TR')}
@@ -434,14 +427,14 @@ export default function Paket18CozyCafe() {
                   type="time"
                   className="col-span-1 h-11 rounded-xl bg-[#221b17] border border-amber-900/40 px-3"
                 />
-                <select className="col-span-1 h-11 rounded-xl bg-[#221b17] border border-amber-900/40 px-3">
+                <select className="col-span-1 h-11 rounded-xl bg-[#221b17] border-amber-900/40 border px-3">
                   {[2, 3, 4, 5, 6, 8].map((n) => (
                     <option key={n} value={n}>
                       {n} kişilik
                     </option>
                   ))}
                 </select>
-                <select className="col-span-1 h-11 rounded-xl bg-[#221b17] border border-amber-900/40 px-3">
+                <select className="col-span-1 h-11 rounded-xl bg-[#221b17] border-amber-900/40 border px-3">
                   {['Salon', 'Pencere Kenarı', 'Bar'].map((n) => (
                     <option key={n}>{n}</option>
                   ))}

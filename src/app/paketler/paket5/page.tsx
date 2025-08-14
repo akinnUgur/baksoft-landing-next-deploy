@@ -1,9 +1,42 @@
+'use client';
+
+import Image from 'next/image';
+
 export default function Paket9RestaurantColorful() {
+  /* ========= Yerel görsel havuzu + seed'li rastgele seçim ========= */
+  const YEMEK_IMG = Array.from({ length: 10 }, (_, i) => `/yemek/yemek-${i + 1}.webp`);
+
+  // Basit seed'li RNG (mulberry32) ve shuffle (SSR/CSR uyumlu – Math.random yok)
+  function mulberry32(a: number) {
+    return function () {
+      let t = (a += 0x6d2b79f5);
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function seededShuffle<T>(arr: T[], seed: number) {
+    const rng = mulberry32(seed);
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // Not: SEED'i değiştirerek farklı "rastgele" dağılım elde edebilirsin.
+  const SEED = 905;
+  const pool = seededShuffle(YEMEK_IMG, SEED);
+  const pick = (i: number) => pool[i % pool.length];
+
+  // Galeri için 6 görseli havuzdan döngüsel seçelim
+  const gallery = Array.from({ length: 6 }, (_, i) => pick(i + 8));
+
   return (
     <main className="min-h-[100dvh] bg-gradient-to-b from-rose-50 via-white to-emerald-50 text-slate-900">
       {/* Üst Bar */}
-
-       {/* Top strip */}
+      {/* Top strip */}
       <div className="text-xs" style={{ background: 'var(--ink)', color: 'var(--bg)' }}>
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
           <span>Baksoft · Özelleştirilebilir Tasarım No:5</span>
@@ -11,39 +44,31 @@ export default function Paket9RestaurantColorful() {
         </div>
       </div>
       <header className="sticky top-0 z-20 border-b bg-white/70 backdrop-blur">
-  <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
-    {/* Logo + Marka */}
-    <a
-      href="/paketler"
-      className="flex items-center gap-2"
-    >
-      <img
-        src="/baksoftLogo.png"
-        alt="Baksoft Logo"
-        className="h-5 w-5 object-contain"
-      />
-      <span className="font-semibold tracking-wide">Baksoft Tasarım</span>
-    </a>
+        <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
+          {/* Logo + Marka */}
+          <a href="/paketler" className="flex items-center gap-2">
+            <Image src="/baksoftLogo.png" alt="Baksoft Logo" width={20} height={20} className="object-contain" />
+            <span className="font-semibold tracking-wide">Baksoft Tasarım</span>
+          </a>
 
-    {/* Menü */}
-    <nav className="hidden md:flex gap-6 text-sm text-slate-600">
-      <a href="#menu" className="hover:text-slate-900">Menü</a>
-      <a href="#seckiler" className="hover:text-slate-900">Şefin Seçkileri</a>
-      <a href="#rezervasyon" className="hover:text-slate-900">Rezervasyon</a>
-      <a href="#galeri" className="hover:text-slate-900">Galeri</a>
-      <a href="#iletisim" className="hover:text-slate-900">İletişim</a>
-    </nav>
+          {/* Menü */}
+          <nav className="hidden md:flex gap-6 text-sm text-slate-600">
+            <a href="#menu" className="hover:text-slate-900">Menü</a>
+            <a href="#seckiler" className="hover:text-slate-900">Şefin Seçkileri</a>
+            <a href="#rezervasyon" className="hover:text-slate-900">Rezervasyon</a>
+            <a href="#galeri" className="hover:text-slate-900">Galeri</a>
+            <a href="#iletisim" className="hover:text-slate-900">İletişim</a>
+          </nav>
 
-    {/* Sağ buton */}
-    <a
-      href="#rezervasyon"
-      className="rounded-xl px-3 py-1.5 text-sm bg-rose-600 text-white hover:bg-rose-700 transition"
-    >
-      Masa Ayırt
-    </a>
-  </div>
-</header>
-
+          {/* Sağ buton */}
+          <a
+            href="#rezervasyon"
+            className="rounded-xl px-3 py-1.5 text-sm bg-rose-600 text-white hover:bg-rose-700 transition"
+          >
+            Masa Ayırt
+          </a>
+        </div>
+      </header>
 
       {/* HERO */}
       <section className="relative overflow-hidden">
@@ -76,18 +101,19 @@ export default function Paket9RestaurantColorful() {
             </div>
           </div>
 
-          {/* Hero görseli (external) */}
+          {/* Hero görseli – yerel havuz */}
           <div className="md:col-span-5">
-            <div className="relative rounded-2xl overflow-hidden border shadow-sm">
-              <img
-                src="https://images.pexels.com/photos/590761/pexels-photo-590761.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            <div className="relative rounded-2xl overflow-hidden border shadow-sm aspect-[4/3]">
+              <Image
+                src={pick(0)}
                 alt="Odun fırını pizza, taze fesleğen ve domates"
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
             </div>
-            <p className="mt-2 text-xs text-slate-500">Foto: Pexels</p>
           </div>
         </div>
       </section>
@@ -101,22 +127,28 @@ export default function Paket9RestaurantColorful() {
               {
                 name: "Burrata Caprese",
                 desc: "Renkli domatesler, burrata, fesleğen yağı",
-                img: "https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                img: pick(1),
               },
               {
                 name: "Spaghetti Carbonara",
                 desc: "Pecorino, yumurta, guanciale",
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Spaghetti_alla_carbonara%2C_2010.jpg/1024px-Spaghetti_alla_carbonara%2C_2010.jpg",
+                img: pick(2),
               },
               {
                 name: "Panna Cotta & Çilek",
                 desc: "Vanilya notaları, çilek sos",
-                img: "https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                img: pick(3),
               },
             ].map((item) => (
               <article key={item.name} className="group rounded-2xl border overflow-hidden bg-white">
                 <div className="relative aspect-[16/11] overflow-hidden">
-                  <img src={item.img} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition" />
+                  <Image
+                    src={item.img}
+                    alt={item.name}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover transition group-hover:scale-105"
+                  />
                   <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
                 </div>
                 <div className="p-5">
@@ -142,10 +174,12 @@ export default function Paket9RestaurantColorful() {
             {/* Pizza */}
             <div className="rounded-2xl border overflow-hidden bg-white">
               <div className="relative aspect-[16/9]">
-                <img
-                  src="https://images.pexels.com/photos/4109084/pexels-photo-4109084.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                <Image
+                  src={pick(4)}
                   alt="Renkli sebzeli pizza"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
                 <div className="absolute top-3 left-3 px-2 py-1 rounded bg-rose-600 text-white text-xs">Pizza</div>
               </div>
@@ -169,10 +203,12 @@ export default function Paket9RestaurantColorful() {
             {/* Makarna */}
             <div className="rounded-2xl border overflow-hidden bg-white">
               <div className="relative aspect-[16/9]">
-                <img
-                  src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                <Image
+                  src={pick(5)}
                   alt="Taze makarna tabağı"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
                 <div className="absolute top-3 left-3 px-2 py-1 rounded bg-emerald-600 text-white text-xs">Makarna</div>
               </div>
@@ -196,10 +232,12 @@ export default function Paket9RestaurantColorful() {
             {/* Salata */}
             <div className="rounded-2xl border overflow-hidden bg-white md:col-span-1">
               <div className="relative aspect-[16/9]">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Fresh_Salad_%28Unsplash%29.jpg/1024px-Fresh_Salad_%28Unsplash%29.jpg"
+                <Image
+                  src={pick(6)}
                   alt="Taze renkli salata"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
                 <div className="absolute top-3 left-3 px-2 py-1 rounded bg-emerald-600 text-white text-xs">Salatalar</div>
               </div>
@@ -222,10 +260,12 @@ export default function Paket9RestaurantColorful() {
             {/* Tatlı */}
             <div className="rounded-2xl border overflow-hidden bg-white md:col-span-1">
               <div className="relative aspect-[16/9]">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Porcion_de_tarta_de_chocolate.jpg"
+                <Image
+                  src={pick(7)}
                   alt="Çikolatalı tatlı dilimi"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
                 <div className="absolute top-3 left-3 px-2 py-1 rounded bg-rose-600 text-white text-xs">Tatlılar</div>
               </div>
@@ -245,8 +285,6 @@ export default function Paket9RestaurantColorful() {
               </ul>
             </div>
           </div>
-
-          <p className="mt-6 text-xs text-slate-500">* Görseller Pexels/Wikimedia kaynaklı örnek görsellerdir.</p>
         </div>
       </section>
 
@@ -304,20 +342,18 @@ export default function Paket9RestaurantColorful() {
           <div className="md:col-span-7">
             <h2 className="text-3xl font-semibold font-serif">Galeri</h2>
             <div className="mt-6 grid grid-cols-3 gap-3">
-              {[
-                "https://images.pexels.com/photos/2619967/pexels-photo-2619967.jpeg?auto=compress&cs=tinysrgb&w=800",
-                "https://images.pexels.com/photos/858508/pexels-photo-858508.jpeg?auto=compress&cs=tinysrgb&w=800",
-                "https://images.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg?auto=compress&cs=tinysrgb&w=800",
-                "https://images.pexels.com/photos/2237/restaurant-person-people-hand.jpg?auto=compress&cs=tinysrgb&w=800",
-                "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&w=800",
-                "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=800",
-              ].map((src, i) => (
-                <div key={i} className="aspect-square rounded-xl overflow-hidden border">
-                  <img src={src} alt={`Galeri ${i + 1}`} className="w-full h-full object-cover" />
+              {gallery.map((src, i) => (
+                <div key={i} className="aspect-square rounded-xl overflow-hidden border relative">
+                  <Image
+                    src={src}
+                    alt={`Galeri ${i + 1}`}
+                    fill
+                    sizes="(max-width: 1024px) 33vw, 20vw"
+                    className="object-cover"
+                  />
                 </div>
               ))}
             </div>
-            <p className="mt-2 text-xs text-slate-500">Fotoğraflar: Pexels/Wikimedia – demo amaçlıdır.</p>
           </div>
           <div className="md:col-span-5">
             <h2 className="text-3xl font-semibold font-serif">Konum</h2>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-
+import Image from "next/image";
 /* =========================
    Types & Helpers
 ========================= */
@@ -306,7 +306,7 @@ export default function Paket13Gym() {
   const base = useMemo(() => (selected ? priceFor(selected, billing) : 0), [selected, billing]);
   const total = useMemo(() => {
     if (!selected) return 0;
-    let t = base;
+    const t = base; // ✅ let → const
     let discount = 0;
     if (isStudent) discount += STUDENT_DISCOUNT;
     if (promo.trim().toUpperCase() === PROMO_CODE) discount += PROMO_DISCOUNT;
@@ -325,13 +325,13 @@ export default function Paket13Gym() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) setSaved(JSON.parse(raw));
-    } catch {}
+    } catch { }
   }, []);
   const savePrograms = (arr: Program[]) => {
     setSaved(arr);
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-    } catch {}
+    } catch { }
   };
   const saveCurrent = () => program && savePrograms([program, ...saved].slice(0, 12));
   const removeSaved = (id: string) => savePrograms(saved.filter((p) => p.id !== id));
@@ -394,45 +394,48 @@ export default function Paket13Gym() {
       </div>
 
       {/* HEADER */}
-     <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/75 backdrop-blur">
-  <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
-    {/* Logo + Marka */}
-    <a
-      href="/paketler"
-      className="flex items-center gap-2"
-    >
-      <img
-        src="/baksoftLogo.png"
-        alt="Baksoft Logo"
-        className="h-8 w-8 object-contain"
-      />
-      <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
-    </a>
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/75 backdrop-blur">
+        <div className="mx-auto max-w-7xl px-4 h-16 flex items-center gap-4">
+          {/* Logo + Marka */}
+          <a
+            href="/paketler"
+            className="flex items-center gap-2"
+          >
+            <Image
+              src="/baksoftLogo.png"
+              alt="Baksoft Logo"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
+            <div className="font-semibold tracking-wide">Baksoft Tasarım</div>
+          </a>
 
-    {/* Menü */}
-    <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
-      <a href="#plans" className="hover:text-white">Üyelik</a>
-      <a href="#builder" className="hover:text-white">Program Oluştur</a>
-      <a href="#schedule" className="hover:text-white">Ders Takvimi</a>
-      <a href="#coaches" className="hover:text-white">Antrenörler</a>
-      <a href="#contact" className="hover:text-white">İletişim</a>
-    </nav>
+          {/* Menü */}
+          <nav className="hidden md:flex ml-6 gap-6 text-sm text-slate-300">
+            <a href="#plans" className="hover:text-white">Üyelik</a>
+            <a href="#builder" className="hover:text-white">Program Oluştur</a>
+            <a href="#schedule" className="hover:text-white">Ders Takvimi</a>
+            <a href="#coaches" className="hover:text-white">Antrenörler</a>
+            <a href="#contact" className="hover:text-white">İletişim</a>
+          </nav>
 
-    {/* Sağ buton */}
-    <a
-      href="#plans"
-      className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-lime-500 text-slate-900 font-semibold hover:bg-lime-400 transition"
-    >
-      Üye Ol
-    </a>
-  </div>
-</header>
+          {/* Sağ buton */}
+          <a
+            href="#plans"
+            className="ml-auto rounded-xl px-4 h-10 grid place-items-center bg-lime-500 text-slate-900 font-semibold hover:bg-lime-400 transition"
+          >
+            Üye Ol
+          </a>
+        </div>
+      </header>
 
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <img
+        <Image
           src="https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1600"
           alt="Gym motivation"
+          fill
           className="absolute inset-0 w-full h-full object-cover opacity-30"
         />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_40%_at_20%_0%,rgba(132,204,22,0.18),transparent),radial-gradient(50%_35%_at_100%_0%,rgba(34,211,238,0.18),transparent)]" />
@@ -860,8 +863,7 @@ export default function Paket13Gym() {
           {COACHES.map((c) => (
             <article key={c.id} className="rounded-2xl border border-white/10 bg-white/5 p-5">
               <div className="flex items-center gap-3">
-                <img src={c.avatar} alt={c.name} className="h-14 w-14 rounded-xl object-cover" />
-                <div>
+                         <div>
                   <div className="text-lg font-semibold">{c.name}</div>
                   <div className="text-sm text-slate-300">⭐ {c.rating.toFixed(1)}</div>
                 </div>
@@ -1280,7 +1282,7 @@ function PtBookingDrawer({
             <>
               <div className="rounded-xl border border-white/10 p-4">
                 <div className="flex items-center gap-3">
-                  <img src={coach.avatar} alt={coach.name} className="h-12 w-12 rounded-lg object-cover" />
+                  <Image src={coach.avatar} width={48} height={48} alt={coach.name} className="h-12 w-12 rounded-lg object-cover" />
                   <div>
                     <div className="font-semibold">{coach.name}</div>
                     <div className="text-sm text-slate-300">⭐ {coach.rating.toFixed(1)} · {coach.specialties.join(' / ')}</div>

@@ -98,7 +98,7 @@ export default function StoryScrollerPro({ stories }: { stories: Story[] }) {
               key={s.id}
               id={`story-${s.id}`}
               data-index={i}
-              ref={(el) => (cardRefs.current[s.id] = el)}
+              ref={el => { cardRefs.current[s.id] = el; }}
               className={`rounded-3xl overflow-hidden border bg-white pkg-tilt transition scroll-mt-24 ${i === active ? 'ring-2 ring-indigo-500/70' : ''}`}
               style={{borderColor:'color-mix(in oklab, #000 12%, transparent)'}}
             >

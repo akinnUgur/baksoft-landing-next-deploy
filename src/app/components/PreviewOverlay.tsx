@@ -5,7 +5,6 @@ import ImgSafe from './ImgSafe';
 import { CarouselItem, Feature, PackageItem } from '../lib/types';
 import { FEATURE_LABEL } from '../lib/data';
 
-
 export default function PreviewOverlay({
   preview,
   meta,
@@ -17,6 +16,8 @@ export default function PreviewOverlay({
 }) {
   const [loading, setLoading] = useState(false);
   const [frameFailed, setFrameFailed] = useState(false);
+
+  // preview değişince yeniden hesaplanır (dependency: preview)
   const frameSrc = useMemo(() => {
     if (!preview) return '';
     try {
@@ -24,16 +25,18 @@ export default function PreviewOverlay({
     } catch {
       return preview.slug;
     }
-  }, [preview?.slug]);
+  }, [preview]);
 
+  // frameSrc değişince loading başlat + hata zamanlayıcısı
   useEffect(() => {
-    if (!preview) return;
+    if (!frameSrc) return;
     setLoading(true);
     setFrameFailed(false);
     const id = window.setTimeout(() => setFrameFailed(true), 3500);
     return () => window.clearTimeout(id);
   }, [frameSrc]);
 
+  // ESC ile kapatma
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', onKey);
@@ -49,14 +52,19 @@ export default function PreviewOverlay({
         className="absolute inset-x-0 top-10 mx-auto max-w-6xl rounded-2xl border bg-white shadow-2xl overflow-hidden z-20 will-change-transform"
         style={{ borderColor: 'color-mix(in oklab, #000 12%, transparent)', transform: 'translateZ(0)' }}
       >
-        <div className="h-14 px-4 border-b flex items-center justify-between"
-             style={{ borderColor: 'color-mix(in oklab, #000 12%, transparent)' }}>
+        <div
+          className="h-14 px-4 border-b flex items-center justify-between"
+          style={{ borderColor: 'color-mix(in oklab, #000 12%, transparent)' }}
+        >
           <div>
             <div className="text-sm text-slate-500">Önizleme</div>
             <div className="font-semibold">{preview.title}</div>
           </div>
-          <button onClick={onClose} className="h-9 px-3 rounded-lg border text-sm"
-                  style={{ borderColor: 'color-mix(in oklab, #000 12%, transparent)' }}>
+          <button
+            onClick={onClose}
+            className="h-9 px-3 rounded-lg border text-sm"
+            style={{ borderColor: 'color-mix(in oklab, #000 12%, transparent)' }}
+          >
             Kapat
           </button>
         </div>
@@ -74,8 +82,11 @@ export default function PreviewOverlay({
               src={frameSrc}
               className="w-full h-[70vh]"
               loading="lazy"
-              onLoad={() => { setLoading(false); setFrameFailed(false); }}
-              title={`Önizleme: ${preview?.title || 'Önizleme'}`}
+              onLoad={() => {
+                setLoading(false);
+                setFrameFailed(false);
+              }}
+              title={`Önizleme: ${preview.title}`}
             />
 
             {frameFailed && (
@@ -94,11 +105,16 @@ export default function PreviewOverlay({
             )}
           </div>
 
-          <aside className="md:col-span-4 p-0 border-l" style={{ borderColor: 'color-mix(in oklab, #000 12%, transparent)' }}>
+          <aside
+            className="md:col-span-4 p-0 border-l"
+            style={{ borderColor: 'color-mix(in oklab, #000 12%, transparent)' }}
+          >
             <div className="relative">
               <ImgSafe src={meta?.cover} alt={preview.title} className="w-full h-40 object-cover" />
               {meta?.vibe && (
-                <span className="absolute left-3 top-3 text-[11px] px-2 py-1 rounded-full bg-black/60 text-white">{meta.vibe}</span>
+                <span className="absolute left-3 top-3 text-[11px] px-2 py-1 rounded-full bg-black/60 text-white">
+                  {meta.vibe}
+                </span>
               )}
             </div>
             <div className="p-4">

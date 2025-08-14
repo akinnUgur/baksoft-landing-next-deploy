@@ -85,14 +85,14 @@ const Hero = () => {
           >
             <Sparkles className="w-4 h-4 text-favorite " />
             <span className="text-sm font-medium text-slate-800 ">
-              {"Teknokent'ten Yenilikçi Çözümler"}
+              {" Teknokent'ten Yenilikçi Çözümler"}
             </span>
           </motion.div>
 
           {/* Başlık */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-text dark:text-text-dark mb-6 mt-4 "
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-text dark:text-text-dark mb-6 mt-12 "
           >
             <span className="block">Yazılım Çözümlerinizin</span>
             <span className="block bg-gradient-to-r from-favorite to-accent bg-clip-text text-transparent">
