@@ -44,19 +44,34 @@ export const metadata = {
     images: ["https://www.baksoftarge.com/og-image.jpg"],
   },
   metadataBase: new URL("https://www.baksoftarge.com"),
-  alternates: {
-    canonical: "/projects",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  alternates: { canonical: "/projects" },
+  robots: { index: true, follow: true },
 };
 
-export default function ServicesPage() {
+export default function ProjectsPage() {
   return (
-    <PageTransition>
-      <Projects />
-    </PageTransition>
+    <main
+      style={{
+        color: "#0b1220",
+        background:
+          "radial-gradient(60% 40% at 12% 0%, rgba(99,102,241,0.08), transparent), radial-gradient(40% 30% at 100% 0%, rgba(16,185,129,0.06), transparent), var(--page-bg, #f7f9ff)",
+      }}
+      className="min-h-[100dvh]"
+    >
+      {/* sayfa içeriği */}
+      <PageTransition>
+        <Projects />
+      </PageTransition>
+
+      {/* Dark/Light için sayfa bazlı değişken (styled-jsx yok) */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            :root { --page-bg: #f7f9ff; }
+            .dark { --page-bg: #0b1220; }
+          `,
+        }}
+      />
+    </main>
   );
 }

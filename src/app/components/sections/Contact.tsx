@@ -120,9 +120,9 @@ const Contact = () => {
   ];
 
   return (
-    <section className="py-20 bg-primary dark:bg-primary-dark relative overflow-hidden">
+    <section className="py-20  relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-favorite/5 to-accent/5 dark:from-favorite/10 dark:to-accent/10" />
+      <div className="absolute inset-0 " />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
