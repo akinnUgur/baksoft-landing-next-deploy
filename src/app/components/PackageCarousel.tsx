@@ -184,7 +184,7 @@ export default function PackageCarousel({
               Baksoft • Paket Hub
             </div>
             <h2 className="mt-2 text-2xl sm:text-3xl font-semibold">Paket Galerisi</h2>
-            <p className={`text-sm mt-1 ${subtle}`}>Tek satır, ok tuşu & dokunmatik; sonsuz döngü.</p>
+            <p className={`text-sm mt-1 ${subtle}`}>İstediğiniz tarza ve konsepte uyarlayabileceğimiz paketlerimizle tanışın.</p>
           </div>
           <div className="flex items-center gap-3">
             <div className={`text-sm tabular-nums ${subtle}`}>
