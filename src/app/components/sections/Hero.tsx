@@ -148,20 +148,25 @@ const Hero = () => {
           </motion.div>
 
           {/* İstatistikler */}
-          <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-favorite mb-2">2025</div>
-              <div className="text-sm text-subtext dark:text-subtext-dark">Kuruluş Yılı</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-favorite mb-2">TÜBİTAK</div>
-              <div className="text-sm text-subtext dark:text-subtext-dark">Destekli Proje</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-favorite mb-2">SaaS</div>
-              <div className="text-sm text-subtext dark:text-subtext-dark">Odaklı Çözümler</div>
-            </div>
-          </motion.div>
+          {/* İstatistikler */}
+<motion.div
+  variants={itemVariants}
+  className="flex flex-wrap justify-center gap-6 max-w-full mx-auto text-sm sm:text-base"
+>
+  <div className="text-center min-w-[90px]">
+    <div className="text-xl sm:text-3xl font-bold text-favorite mb-1">2025</div>
+    <div className="text-xs sm:text-sm text-subtext dark:text-subtext-dark">Kuruluş Yılı</div>
+  </div>
+  <div className="text-center min-w-[90px]">
+    <div className="text-xl sm:text-3xl font-bold text-favorite mb-1">TÜBİTAK</div>
+    <div className="text-xs sm:text-sm text-subtext dark:text-subtext-dark">Destekli Proje</div>
+  </div>
+  <div className="text-center min-w-[90px]">
+    <div className="text-xl sm:text-3xl font-bold text-favorite mb-1">SaaS</div>
+    <div className="text-xs sm:text-sm text-subtext dark:text-subtext-dark">Odaklı Çözümler</div>
+  </div>
+</motion.div>
+
         </motion.div>
       </div>
     </section>
