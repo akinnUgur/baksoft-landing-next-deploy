@@ -89,11 +89,11 @@ export default function HomeClient() {
         <StoryScrollerPro stories={STORIES} />
       </section>
 
-      {/* PRICING */}
+      {/* PRICING
       <section id="pricing" className="mx-auto max-w-7xl px-4 py-12 md:py-16" aria-labelledby="pricing-heading">
         <h2 id="pricing-heading" className="sr-only">Fiyatlandırma</h2>
         <Pricing />
-      </section>
+      </section> */}
 
       {/* PREVIEW OVERLAY (Quick View) */}
       <PreviewOverlay
