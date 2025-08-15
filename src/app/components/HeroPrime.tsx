@@ -90,13 +90,13 @@ export default function HeroPrime() {
             >
               Paketleri keşfet
             </a>
-            <a
+            {/* <a
               href="#pricing"
               className="h-11 px-5 rounded-xl border hover:bg-slate-50 dark:text-white flex items-center justify-center"
               style={{ borderColor: 'color-mix(in oklab, #000 12%, transparent)' }}
             >
               Fiyatlandırma
-            </a>
+            </a> */}
           </div>
 
           <div className="mt-8 text-xs text-slate-500">
