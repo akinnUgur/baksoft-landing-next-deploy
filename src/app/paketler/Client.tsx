@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
 import type { CarouselItem, PackageItem } from '../lib/types';
 import HeroPrime from '../components/HeroPrime';
-import Pricing from '../components/Pricing';
+// import Pricing from '../components/Pricing';
 import { CAROUSEL_ITEMS, PACKAGES, STORIES } from '../lib/data';
 
 // Ağır parçaları split edelim:
